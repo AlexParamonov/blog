@@ -17,6 +17,11 @@ group :assets do
   gem 'uglifier', '~>1.0.3'
 end
 
+group :development do
+  gem 'guard', '~>1.2'
+  gem 'guard-shell', '~>0.5'
+end
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.6'
   # gem 'database_cleaner', '~>0.8'
