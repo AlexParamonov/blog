@@ -22,14 +22,14 @@ group :development do
   gem 'guard-shell', '~>0.5'
 end
 
-group :test, :development do
-  gem 'rspec-rails', '~> 2.6'
-  # gem 'database_cleaner', '~>0.8'
+group :test do
+  gem 'factory_girl', '~>3.5'
+  gem 'kameleon', '~> 0.2'
 end
 
-group :test do
-  # gem 'factory_girl', '~>3.5'
-  gem 'kameleon', '~> 0.2'
+group :test, :development do
+  gem 'rspec-rails', '~> 2.6'
+  gem 'database_cleaner', '~>0.8'
 end
 
 
