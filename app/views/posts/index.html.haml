@@ -1,22 +1,6 @@
 %h1 Listing posts
 
-%table
-  %tr
-    %th Title
-    %th Summary
-    %th Content
-    %th
-    %th
-    %th
-
-  - @posts.each do |post|
-    %tr
-      %td= link_to post.title, post
-      %td= post.summary
-      %td= post.content
-      %td= link_to 'Show', post
-      %td= link_to 'Edit', edit_post_path(post)
-      %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
+= @posts.render(self)
 
 %br
 

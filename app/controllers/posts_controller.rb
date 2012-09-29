@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
+  include DisplayCase::ExhibitsHelper
+
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = exhibit(Post.all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    @post = exhibit(Post.find(params[:id]))
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = Post.new
+    @post = exhibit(Post.new)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +36,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    @post = exhibit(Post.find(params[:id]))
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    @post = exhibit(Post.new(params[:post]))
 
     respond_to do |format|
       if @post.save
@@ -56,7 +58,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    @post = Post.find(params[:id])
+    @post = exhibit(Post.find(params[:id]))
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
