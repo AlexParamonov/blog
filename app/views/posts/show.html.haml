@@ -1,14 +1,6 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @post.title
-%p
-  %b Summary:
-  = @post.summary
-%p
-  %b Content:
-  = @post.content
+= @post.render_details(self)
 
 = link_to 'Edit', edit_post_path(@post)
 \|
