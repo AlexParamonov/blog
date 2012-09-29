@@ -1,4 +1,4 @@
-class Blog
+class Feed
   attr_accessor :post_source, :entry_fetcher
 
   def initialize(entry_fetcher = ->{ @entries })
@@ -7,7 +7,7 @@ class Blog
 
   def new_post(*args)
     return post_source.(*args).tap do |post|
-      post.blog = self
+      post.feed = self
     end
   end
 
