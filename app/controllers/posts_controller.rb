@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = exhibit(Post.new)
+    @post = form_exhibit(Post.new)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +36,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = exhibit(Post.find(params[:id]))
+    @post = form_exhibit(Post.find(params[:id]))
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = exhibit(Post.new(params[:post]))
+    @post = form_exhibit(Post.new(params[:post]))
 
     respond_to do |format|
       if @post.save
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    @post = exhibit(Post.find(params[:id]))
+    @post = form_exhibit(Post.find(params[:id]))
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
@@ -81,5 +81,10 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def form_exhibit(object)
+    exhibit(ValidationExhibit.new(object, self))
   end
 end
