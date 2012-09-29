@@ -38,4 +38,15 @@ describe Blog do
       blog.entries.should include entry
     end
   end
+
+  describe "#entries" do
+    let(:blog)    { Blog.new }
+
+    it "should return entries from a fetcher" do
+      entries_fetcher = ->{ [:one, :two] }
+      blog = Blog.new(entries_fetcher)
+
+      blog.entries.should eq  [:one, :two]
+    end
+  end
 end
