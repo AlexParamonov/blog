@@ -11,6 +11,11 @@ class Feed
     end
   end
 
+  # Fetch a post by ID
+  def post(id)
+    Post.find_by_id(id)
+  end
+
   def entries
     fetch_entries || []
   end
@@ -23,5 +28,9 @@ class Feed
   private
   def fetch_entries
     entry_fetcher.call()
+  end
+
+  def post_source
+    @post_source ||= Post.public_method(:new)
   end
 end

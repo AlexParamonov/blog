@@ -4,7 +4,6 @@ require_relative "../../app/models/feed"
 require "ostruct"
 describe Feed do
   let(:feed)    { Feed.new }
-  let(:entry) { stub.as_null_object }
 
   specify { feed.entries.should be_empty }
 
@@ -25,7 +24,7 @@ describe Feed do
     it "accepts an attribute hash and delegates it to a source" do
       # prepare a source
       post_source = mock(:post_source)
-      post_source.should_receive(:call).with(x:1, y:2).and_return(entry)
+      post_source.should_receive(:call).with(x:1, y:2).and_return(stub.as_null_object)
       feed.post_source = post_source
 
       feed.new_post(x:1, y:2)
@@ -33,6 +32,8 @@ describe Feed do
   end
 
   describe "#add_entry" do
+    let(:entry) { stub.as_null_object }
+
     it "adds the entry to the feed" do
       feed.add_entry(entry)
       feed.entries.should include entry

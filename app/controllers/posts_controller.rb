@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  include DisplayCase::ExhibitsHelper
+  respond_to :html, :json
 
   # GET /posts
   # GET /posts.json
@@ -12,37 +12,24 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
-    @post = exhibit(Post.find(params[:id]))
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
-    end
+    @post = exhibit(feed.post(params[:id]))
+    respond_with(@post)
   end
 
-  # GET /posts/new
-  # GET /posts/new.json
   def new
-    @post = form_exhibit(Post.new)
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
-    end
+    @post = form_exhibit(feed.new_post)
   end
 
-  # GET /posts/1/edit
   def edit
-    @post = form_exhibit(Post.find(params[:id]))
+    @post = form_exhibit(feed.post(params[:id]))
+    respond_with(@post)
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = form_exhibit(Post.new(params[:post]))
+    @post = form_exhibit(feed.new_post(params[:post]))
 
     respond_to do |format|
       if @post.save
@@ -58,7 +45,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.json
   def update
-    @post = form_exhibit(Post.find(params[:id]))
+    @post = form_exhibit(feed.post(params[:id]))
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
@@ -74,13 +61,10 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
+    @post = feed.post(params[:id])
     @post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :no_content }
-    end
+    respond_with(@post)
   end
 
   private
