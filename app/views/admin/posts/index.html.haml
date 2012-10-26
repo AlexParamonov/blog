@@ -1,0 +1,7 @@
+%h1 Listing posts
+
+= @posts.render(self)
+
+%br
+
+= link_to t('post.button.new'), new_admin_post_path

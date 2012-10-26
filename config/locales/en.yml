@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+
+  post:
+    button:
+      new: "Add post"

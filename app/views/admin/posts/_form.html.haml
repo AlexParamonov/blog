@@ -1,4 +1,4 @@
-= form_for @post do |f|
+= form_for [:admin, @post] do |f|
   = raw @post.render_errors
   .field
     = f.label :title

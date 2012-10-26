@@ -24,7 +24,7 @@ class TestUser
     end
   end
 
-  module PostEditor
+  module Admin
     def visit_edit_post_page_for(post)
       visit edit_admin_post_path(post)
     end
@@ -33,8 +33,8 @@ class TestUser
       visit new_post_path
     end
 
-    def visit_posts_listing
-      visit_root
+    def visit_admin_posts_listing
+      visit admin_posts_path
       # click 'posts'
     end
   end
