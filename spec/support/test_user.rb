@@ -29,13 +29,13 @@ class TestUser
       visit edit_admin_post_path(post)
     end
 
-    def visit_new_post_page
-      visit new_post_path
-    end
-
     def visit_admin_posts_listing
       visit admin_posts_path
       # click 'posts'
+    end
+
+    def visit_admin_new_post_page
+      visit new_admin_post_path
     end
   end
 end

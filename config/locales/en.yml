@@ -7,3 +7,8 @@ en:
   post:
     button:
       new: "Add post"
+      publish: "Publish"
+
+    message:
+      published: "Post published"
+      

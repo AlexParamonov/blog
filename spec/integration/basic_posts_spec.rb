@@ -36,7 +36,7 @@ describe "Posts behavior:" do
         end
       end
 
-      it "open a post page for reading by clicking on a title" do
+      it "opens a post page for reading by clicking on a title" do
         click @oor.title
 
         see @oor.title
@@ -55,8 +55,8 @@ describe "Posts behavior:" do
 
       describe "post listing page" do
         before(:each) do
-          @oor         = background.publish_post :oor_post
-          @js          = background.publish_post :js_post
+          @oor = background.publish_post :oor_post
+          @js  = background.publish_post :js_post
 
           alex.visit_admin_posts_listing
         end
@@ -68,7 +68,7 @@ describe "Posts behavior:" do
           end
         end
 
-        it "open a post preview by clicking on a title" do
+        it "opens a post preview by clicking on a title" do
           click @oor.title
 
           see @oor.title
@@ -79,9 +79,31 @@ describe "Posts behavior:" do
           alex.should_be_at admin_post_path(@oor)
         end
 
-        it "open a post creation page" do
+        it "opens a post creation page" do
           iclick 'post.button.new'
           alex.should_be_at new_admin_post_path
+        end
+      end
+
+      describe "post creation page" do
+        before(:each) do
+          alex.visit_admin_new_post_page
+        end
+
+        it "opens a preview page"
+        it "adds a new post" do
+          fill_in "New post"     => 'post_title',
+                  "Post summary" => 'post_summary',
+                  "Post content" => 'post_content'
+
+          iclick "post.button.publish"
+          isee   "post.message.published"
+
+          within('#entries') do
+            see "New post"
+            see "Post summary"
+            see "Post content"
+          end
         end
       end
 
