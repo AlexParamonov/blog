@@ -1,18 +1,18 @@
 require_relative "../spec_helper_lite"
+require_relative "../support/stub_helper"
 require_relative "../../app/models/validation_handler"
 
-module ValidationHandler
-  module ActiveModel
-    class Errors
+stub_class('ActiveModel::Errors')
 
+describe ValidationHandler do
+  let(:errors) do
+    stub(:errors).tap do |error|
+      error.stub(:is_a?).with(ActiveModel::Errors).and_return(true)
     end
   end
-end
 
-# TODO seems very complicated
-describe ValidationHandler do
   it "should return the ActiveModelHandler if object uses ActiveModel::Errors" do
-    ar_object = stub(:active_record_object, errors: ValidationHandler::ActiveModel::Errors.new)
+    ar_object = stub(:active_record_object, errors: errors)
 
     ValidationHandler.should_receive(:active_model).with(ar_object)
     ValidationHandler.for(ar_object)

@@ -1,8 +1,11 @@
 Blog::Application.routes.draw do
-  resources :posts
+  resources :posts, only: [:index, :show]
 
   root to: 'posts#index'
 
+  namespace :admin do
+    resources :posts
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
