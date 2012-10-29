@@ -68,7 +68,7 @@ describe "Posts behavior:" do
           end
         end
 
-        it "opens a post preview by clicking on a title" do
+        it "opens a post show page by clicking on a title" do
           click @oor.title
 
           see @oor.title
@@ -85,9 +85,22 @@ describe "Posts behavior:" do
         end
       end
 
+      describe "post show page" do
+        before(:each) do
+          @oor = background.publish_post :oor_post
+
+          alex.visit_admin_post_page_for(@oor)
+        end
+
+        it "opens an edit preview page" do
+          click 'edit_post'
+          alex.should_be_at edit_admin_post_path(@oor)
+        end
+      end
+
       describe "post creation page" do
         before(:each) do
-          alex.visit_admin_new_post_page
+          alex.visit_new_admin_post_page
         end
 
         it "opens a preview page"
