@@ -1,7 +1,7 @@
 Blog::Application.routes.draw do
   resources :posts, only: [:index, :show]
 
-  root to: 'posts#index'
+  root to: 'feed#index'
 
   namespace :admin do
     resources :posts

@@ -1,12 +1,21 @@
 class Feed
-  attr_accessor :post_source, :entry_fetcher
+  attr_writer :post_source, :entry_fetcher
 
-  def initialize(entry_fetcher = ->{ @entries })
-    self.entry_fetcher = entry_fetcher
+  def initialize(options = {})
+    self.entry_fetcher = options.fetch(:entry_fetcher, ->{ @entries })
+    self.post_source   = options.fetch(:post_source, ->(*args){ Post.new(*args) })
+  end
+
+  def title
+    "Feed"
+  end
+
+  def subtitle
+    "Ideas, events, solutions"
   end
 
   def new_post(*args)
-    return post_source.(*args).tap do |post|
+    return post_source.call(*args).tap do |post|
       post.feed = self
     end
   end
@@ -31,6 +40,10 @@ class Feed
   end
 
   def post_source
-    @post_source ||= Post.public_method(:new)
+    @post_source
+  end
+
+  def entry_fetcher
+    @entry_fetcher
   end
 end

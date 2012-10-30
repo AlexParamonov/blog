@@ -45,7 +45,7 @@ describe Feed do
 
     it "should return entries from a fetcher" do
       entries_fetcher = ->{ [:one, :two] }
-      feed = Feed.new(entries_fetcher)
+      feed = Feed.new(entry_fetcher: entries_fetcher)
 
       feed.entries.should eq  [:one, :two]
     end

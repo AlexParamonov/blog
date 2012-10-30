@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include DisplayCase::ExhibitsHelper
   protect_from_forgery
+  helper_method :feed
 
   def feed
     @feed ||= exhibit(THE_FEED)
