@@ -13,6 +13,6 @@ class PostsController < ApplicationController
 
   private
   def form_exhibit(object)
-    exhibit(ValidationExhibit.new(object, self))
+    ValidationExhibit.new(exhibit(object), self)
   end
 end
