@@ -33,7 +33,7 @@ module Admin
       @post = form_exhibit(feed.post(params[:id]))
 
       if @post.update_attributes(params[:post])
-        redirect_to @post, notice: 'Post was successfully updated.'
+        redirect_to @post, notice: t('post.message.updated')
       else
         render action: "edit"
       end
@@ -43,12 +43,16 @@ module Admin
       @post = feed.post(params[:id])
       @post.destroy
 
-      respond_with(@post)
+      if @post.destroy
+        redirect_to admin_posts_path, notice: t('post.message.deleted')
+      else
+        render action: "edit"
+      end
     end
 
     private
     def form_exhibit(object)
-      exhibit(ValidationExhibit.new(object, self))
+      ValidationExhibit.new(exhibit(object), self)
     end
   end
 end

@@ -8,7 +8,11 @@ en:
     button:
       new: "Add post"
       publish: "Publish"
+      edit: "Edit"
+      delete: "Delete"
 
     message:
       published: "Post published"
+      deleted: "Post deleted"
+      updated: "Post updated"
       

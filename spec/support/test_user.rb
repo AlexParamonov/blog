@@ -17,29 +17,30 @@ class TestUser
     visit '/'
   end
 
-  module Visitor
-    def visit_posts_listing
-      visit_root
-      click 'posts'
-    end
-  end
-
-  module Admin
-    def visit_edit_post_page_for(post)
-      visit edit_admin_post_path(post)
+  module Post
+    module Visitor
+      def visit_listing_page
+        visit_root
+        click 'posts'
+      end
     end
 
-    def visit_admin_post_page_for(post)
-      visit admin_post_path(post)
-    end
+    module Admin
+      def visit_edit_page(post)
+        visit edit_admin_post_path(post)
+      end
 
-    def visit_admin_posts_listing
-      visit admin_posts_path
-      # click 'posts'
-    end
+      def visit_show_page(post)
+        visit admin_post_path(post)
+      end
 
-    def visit_new_admin_post_page
-      visit new_admin_post_path
+      def visit_listing_page
+        visit admin_posts_path
+      end
+
+      def visit_new_page
+        visit new_admin_post_path
+      end
     end
   end
 end

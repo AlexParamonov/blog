@@ -19,14 +19,14 @@ describe "Admin posts behavior:" do
   end
 
   describe "admin on" do
-    let!(:alex) { user.act_as :Admin }
+    let!(:alex) { user.act_as 'Post::Admin' }
 
     describe "post listing page" do
       before(:each) do
         @oor = background.publish_post :oor_post
         @js  = background.publish_post :js_post
 
-        alex.visit_admin_posts_listing
+        alex.visit_listing_page
       end
 
       it "should see all posts" do
@@ -57,25 +57,45 @@ describe "Admin posts behavior:" do
       before(:each) do
         @oor = background.publish_post :oor_post
 
-        alex.visit_admin_post_page_for(@oor)
+        alex.visit_show_page(@oor)
       end
 
       it "opens an edit preview page" do
-        click 'edit_post'
+        iclick 'post.button.edit'
         alex.should_be_at edit_admin_post_path(@oor)
       end
     end
 
+    describe "post edit page" do
+      before(:each) do
+        @oor = background.publish_post :oor_post
+        @js  = background.publish_post :js_post
+
+        alex.visit_edit_page(@oor)
+      end
+
+      it "deletes current post" do
+        iclick 'post.button.delete'
+        isee   "post.message.deleted"
+
+        alex.should_be_at admin_posts_path
+
+        not_see @oor.title
+        see @js.title
+      end
+
+    end
+
     describe "post creation page" do
       before(:each) do
-        alex.visit_new_admin_post_page
+        alex.visit_new_page
       end
 
       it "opens a preview page"
       it "adds a new post" do
         fill_in "New post"     => 'post_title',
-          "Post summary" => 'post_summary',
-          "Post content" => 'post_content'
+                "Post summary" => 'post_summary',
+                "Post content" => 'post_content'
 
         iclick "post.button.publish"
         isee   "post.message.published"

@@ -19,14 +19,14 @@ describe "Posts behavior:" do
   end
 
   describe "visitor on" do
-    let!(:bob) { user.act_as :Visitor }
+    let!(:bob) { user.act_as 'Post::Visitor' }
 
     describe "post listing page" do
       before(:each) do
         @oor = background.publish_post :oor_post
         @js  = background.publish_post :js_post
 
-        bob.visit_posts_listing
+        bob.visit_listing_page
       end
 
       it "should see all posts" do
