@@ -6,7 +6,7 @@ Blog
 This is snowball application.
 I am using it to try new things.
 
-The goal is to get working application ASAP and try ideas, refactoring in branch and if they succeed, merge them into master.
+The goal is to get working application ASAP and try ideas, refactoring in branch and if they succeed, merge them into master.  
 First deploys are going to be ugly :)
 
 Please [let me know](https://github.com/inbox/new/AlexParamonov) if you plan to use this app for your site.  
