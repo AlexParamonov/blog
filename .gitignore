@@ -17,3 +17,4 @@
 /tags
 
 /config/environments/*.yml
+/config/database.yml
