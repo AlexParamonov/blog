@@ -26,10 +26,11 @@ Installation
 
     git clone git://github.com/AlexParamonov/blog.git
 
-Cd into it and run bundle install:
+Cd into it and run:
 
     cd blog
     bundle install
+    tee config/environments/test.yml config/environments/development.yml < config/environments/environment.sample.yml > /dev/null
 
 Contributing
 -------------

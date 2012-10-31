@@ -15,3 +15,5 @@
 /tmp
 
 /tags
+
+/config/environments/*.yml

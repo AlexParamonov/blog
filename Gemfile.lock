@@ -116,6 +116,7 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (~> 3.1)
       railties (>= 3.1, < 4.1)
+    hashugar (0.0.6)
     headless (0.3.1)
     hike (1.2.1)
     i18n (0.6.1)
@@ -213,6 +214,7 @@ DEPENDENCIES
   guard (~> 1.2)
   guard-shell (~> 0.5)
   haml-rails (~> 0.3)
+  hashugar (~> 0.0.6)
   jquery-rails (~> 2.0)
   kameleon (~> 0.2)
   pry

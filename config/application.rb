@@ -15,6 +15,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+CONFIG = YAML.load(File.read(File.expand_path("config/environments/#{Rails.env}.yml"))).to_hashugar
+
 module Blog
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

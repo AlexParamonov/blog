@@ -1,0 +1,5 @@
+admin:
+  name: alex
+  password: secret
+secret_token: notsosecretreallyssf23t32ergreg434
+require_auth: false

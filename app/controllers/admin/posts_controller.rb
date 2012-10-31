@@ -1,5 +1,6 @@
 module Admin
   class PostsController < ApplicationController
+    http_basic_authenticate_with :name => ::CONFIG.admin.name, :password => ::CONFIG.admin.password if CONFIG.require_auth
     respond_to :html
 
     def index

@@ -7,6 +7,7 @@ gem 'sqlite3'
 gem 'jquery-rails', '~>2.0'
 gem 'haml-rails', '~>0.3'
 gem 'display_case', git: 'git://github.com/AlexParamonov/display-case.git', branch: 'fix-render'
+gem 'hashugar', '~>0.0.6'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
