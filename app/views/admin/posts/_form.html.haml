@@ -1,0 +1,13 @@
+= form_for [:admin, @post] do |f|
+  = raw @post.render_errors
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :summary
+    = f.text_area :summary
+  .field
+    = f.label :content
+    = f.text_area :content
+  .actions
+    = f.submit t 'post.button.publish'
