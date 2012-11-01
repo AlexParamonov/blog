@@ -29,8 +29,9 @@ Installation
 Cd into it and run:
 
     cd blog
-    bundle install
     tee config/environments/test.yml config/environments/development.yml < config/environments/environment.sample.yml > /dev/null
+    cp config/database.sample.yml config/database.yml
+    bundle install
 
 Contributing
 -------------
