@@ -1,24 +1,36 @@
+require "./lib/hash_symbolizer"
 require "rvm/capistrano"
 require 'bundler/capistrano'
+load 'deploy/assets'
 
-CONFIG = YAML.load(File.read(File.expand_path("config/deploy.yml")))
+CONFIG = YAML.load(File.read(File.expand_path("config/deploy.yml"))).extend(HashSymbolizer).symbolize_keys
 
-set :rvm_type, :system
+set :rvm_type,        :system
 set :rvm_ruby_string, '1.9.3'
-set :application, CONFIG['application']
-set :repository,  CONFIG['repository']
-set :scm, CONFIG['scm']
+set :keep_releases,   3
+set :application,     CONFIG.fetch(:application)
+set :repository,      CONFIG.fetch(:repository)
+set :scm,             CONFIG.fetch(:scm)
+set :deploy_server,   CONFIG.fetch(:server)
+set :user,            CONFIG.fetch(:username)
+set :login,           CONFIG.fetch(:login)
 
-dpath = "/home/#{CONFIG['username']}/projects/#{application}"
+set :bundle_without,  [:development, :test]
+set :deploy_to,       "/home/#{user}/projects/#{application}"
+set :bundle_dir,      "#{shared_path}/gems"
+set :unicorn_conf,    "/etc/unicorn/#{application}.#{login}.rb"
+set :unicorn_pid,     "/var/run/unicorn/#{application}.#{login}.pid"
+set :use_sudo,        false
 
-set :user, CONFIG['username']
-set :use_sudo, false
-set :deploy_to, dpath
+server deploy_server, :app, :web, :db, :primary => true
 
-server CONFIG['server'], :app, :web, :db, :primary => true
+set :rake,              "bundle exec rake"
+set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use #{rvm_ruby_string} do bundle exec unicorn_rails -Dc #{unicorn_conf})"
 
-after "deploy:update_code", :copy_database_config, :copy_environment_config
+# Hooks
+before 'deploy:finalize_update', :set_current_release, :copy_database_config, :copy_environment_config
 
+# Tasks
 task :copy_environment_config, roles => :app do
   db_config = "#{shared_path}/environments/production.yml"
   run "cp #{db_config} #{release_path}/config/environments/production.yml"
@@ -29,15 +41,14 @@ task :copy_database_config, roles => :app do
   run "cp #{db_config} #{release_path}/config/database.yml"
 end
 
-set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
-set :unicorn_conf, "/etc/unicorn/#{CONFIG['application_fullname']}.rb"
-set :unicorn_pid, "/var/run/unicorn/#{CONFIG['application_fullname']}.pid"
+task :set_current_release, :roles => :app do
+  set :current_release, latest_release
+end
 
-# - for unicorn - #
 namespace :deploy do
   desc "Start application"
   task :start, :roles => :app do
-    run "#{unicorn_rails} -Dc #{unicorn_conf}"
+    run unicorn_start_cmd
   end
 
   desc "Stop application"
@@ -47,6 +58,6 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_start_cmd}"
   end
 end
