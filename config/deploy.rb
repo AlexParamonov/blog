@@ -10,6 +10,7 @@ set :rvm_ruby_string, '1.9.3'
 set :keep_releases,   3
 set :application,     CONFIG.fetch(:application)
 set :repository,      CONFIG.fetch(:repository)
+set :branch,          CONFIG.fetch(:branch)
 set :scm,             CONFIG.fetch(:scm)
 set :deploy_server,   CONFIG.fetch(:server)
 set :user,            CONFIG.fetch(:username)
