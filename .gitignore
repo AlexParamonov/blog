@@ -18,3 +18,7 @@
 
 /config/environments/*.yml
 /config/database.yml
+/config/deploy.yml
+
+/.rvmrc
+
