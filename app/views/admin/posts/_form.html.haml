@@ -1,5 +1,5 @@
 = form_for [:admin, @post] do |f|
-  = raw @post.render_errors
+  = @post.render_errors self
   .field
     = f.label :title
     = f.text_field :title
@@ -9,5 +9,6 @@
   .field
     = f.label :content
     = f.text_area :content
+  = @post.render_tags self
   .actions
     = f.submit t 'post.button.publish'

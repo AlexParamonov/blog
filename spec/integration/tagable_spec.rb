@@ -12,14 +12,22 @@ describe "Tags module" do
 
   before(:each) do
     @post = background.publish_post :js_post
-    @tags = %w(ruby rails)
-    Tagable.new(@post).tags = @tags
+  end
+
+  after(:each) do
     Tagable.reset_cache
   end
 
   it "should render tags" do
+    @tags = %w(ruby rails)
+    Tagable.new(@post).tags = @tags
+    Tagable.reset_cache
     rendered = TagPresenter.new(Tagable.new(@post)).render_inline
 
     rendered.should match /ruby.*rails/
+  end
+
+  specify "model should not have any tags by default" do
+    Tagable.new(@post).should have(0).tags
   end
 end

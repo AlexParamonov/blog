@@ -3,10 +3,9 @@ require_relative '../models/validation_handler'
 
 # only manual exhibition
 class ValidationExhibit < DisplayCase::Exhibit
-  def render_errors
+  def render_errors(template)
     if errors.any?
-      # TODO investigate why array is returned
-      context.render(partial: 'validation/errors', locals: {errors: errors}).first
+      template.render('validation/errors', errors: errors).html_safe
     end
   end
 

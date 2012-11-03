@@ -93,18 +93,28 @@ describe "Admin posts behavior:" do
 
       it "opens a preview page"
       it "adds a new post" do
-        fill_in "New post"     => 'post_title',
-                "Post summary" => 'post_summary',
-                "Post content" => 'post_content'
+        post = OpenStruct.new(
+          title:    'New post',
+          summary:  'Post summary',
+          content:  'Post content'
+        )
+        fill_in post.title   => 'post_title',
+                post.summary => 'post_summary',
+                post.content => 'post_content'
 
         iclick "post.button.publish"
         isee   "post.message.published"
 
         within('#entries') do
-          see "New post"
-          see "Post summary"
-          see "Post content"
+          see post.title
+          see post.summary
         end
+
+        click post.title
+
+        see post.title
+        see post.summary
+        see post.content
       end
     end
   end
