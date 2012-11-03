@@ -1,6 +1,6 @@
 namespace :ci do
   task :tests do
-    # RSpec::Core::Runner.autorun
+    Rails.env = 'test'
     at_exit { exit RSpec::Core::Runner.run(['spec', '-fprogress']).to_i unless $! }
   end
 end
