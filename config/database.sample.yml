@@ -5,8 +5,9 @@ development: &defaults
   database: db/development.sqlite3
 
 test:
-  <<: *defaults
-  database: db/test.sqlite3
+  adapter: sqlite3
+  database: ":memory:"
+  timeout: 500
 
 production:
   <<: *defaults
