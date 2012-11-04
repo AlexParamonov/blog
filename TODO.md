@@ -1,62 +1,74 @@
-2.0
-===
+v0.2.0
+======
 * Pages
 * Tagging
-* MD post formatting
+* MD post formatting or visual html editor
 
-3.0
-===
+v0.3.0
+======
 * Simple design (bootstrap or self-created)
 
-4.0
-===
-* Allow user registrations
+v1.0.0
+======
+* Cleanup
+
+v1.0.0-review
+=============
+* Refactoring and extraction to modules/gems
+
+v1.1.0
+======
+* User registration (visitor role)
 * Comments
-* Review TODO and Roadmap
 
-5.0
-===
-* Intergation with 3rd party accoutings
-* HTML post formatting
+v1.2.0
+======
+* Integrate with 3rd party accounting
+* Public richtext editor (MD?)
+
+v2.0.0
+======
+* Cleanup
+
+v2.0.0-review
+=============
+* Refactoring and extraction to modules/gems
+
+v2.1.0
+======
 * Embedded images, video
-* Viewable links to external resources (images, video preview)
 
-6.0
-===
+v2.x
+====
+* File import (xml, md, docx)
+* Viewable links to external resources (images, video preview)
+* Search by 3rd party (Google?)
+
+v3.0.0
+======
+* Cleanup
+
+v3.0.0-review
+=============
+* Refactoring and extraction to modules/gems
+
+Ongoing
+=======
 * I18n of an interface
+* Design (responsive, modular and nice)
+
+Future
+======
 * Raiting, vouting
 * Top authors
 * Top posts (views and raiting)
-* Search by 3rd party (Google?)
-
-7.0
-===
-* Design (responsive, modular and nice)
-
-Total rewrite
-=============
-* Decoupe and make code nice O_o
-
-8.0
-===
 * application should be decouped at this stage and have a port for web part
-* File import (xml, md, docx)
-
-9.0
-===
 * Search on demand
 * Posts i18n
-
-10.0
-====
 * Introduce library that contains articles
 
-FREEDOM!!!
-=========
-* change whatever
-
 Refactoring
-=========
+===========
 Disconnect persistence  
     simple mapper or datamapper  
     PORO  
@@ -71,5 +83,4 @@ Extract search to engine
 
 New features (release unknown)
 ==============================
-* Admin interface (after some complexity)
 * RSS feed
