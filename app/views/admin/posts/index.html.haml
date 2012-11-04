@@ -1,8 +1,9 @@
 %h1 Listing posts
 
+%ul.nav.nav-pills
+  %li= link_to 'Add', new_admin_post_path
+  %li.active= link_to 'List', admin_posts_path
+  %li= link_to 'Back', :back
+
 #entries
   = @posts.render(self)
-
-%br
-
-= link_to t('post.button.new'), new_admin_post_path

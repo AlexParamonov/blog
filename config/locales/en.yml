@@ -2,17 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  hello: Hello world
 
   post:
     button:
-      new: "Add post"
-      publish: "Publish"
-      edit: "Edit"
-      delete: "Delete"
+      new: Add post
+      publish: Publish
+      edit: Edit
+      delete: Delete
 
     message:
-      published: "Post published"
-      deleted: "Post deleted"
-      updated: "Post updated"
+      delete:
+        confirm: Are you sure?
+      published: Post published
+      deleted: Post deleted
+      updated: Post updated
       

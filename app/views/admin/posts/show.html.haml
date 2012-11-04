@@ -1,5 +1,21 @@
-= @post.render_details(self)
+%h1 Post details
 
-= link_to 'Edit', edit_admin_post_path(@post), rel: :edit_post
-\|
-= link_to 'Back', admin_posts_path
+%ul.nav.nav-pills
+  %li= link_to 'Add', new_admin_post_path
+  %li= link_to 'List', admin_posts_path
+  %li.active= link_to 'Show', admin_post_path(@post)
+  %li= link_to 'Edit', edit_admin_post_path(@post)
+  %li= link_to 'Back', :back
+  %li.dropdown
+    %a.dropdown-toggle{:href=>"#", :data => {:toggle => "dropdown"}}
+      Extra
+      %b.caret
+    %ul.dropdown-menu
+      %li.divider
+      %li
+        = link_to  @post.path, method: :delete, confirm: t('post.message.delete.confirm') do
+          %i.icon-trash
+          =t('post.button.delete')
+
+
+= @post.render_details(self)
