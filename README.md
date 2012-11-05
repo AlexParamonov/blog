@@ -24,14 +24,18 @@ Installation
 ------------
 Сlone a project:
 
-    git clone git://github.com/AlexParamonov/blog.git
+``` sh
+git clone git://github.com/AlexParamonov/blog.git
+```
 
 Cd into it and run:
 
-    cd blog
-    tee config/environments/test.yml config/environments/development.yml < config/environments/environment.sample.yml > /dev/null
-    cp config/database.sample.yml config/database.yml
-    bundle install --without production
+``` sh
+cd blog
+tee config/environments/test.yml config/environments/development.yml < config/environments/environment.sample.yml > /dev/null
+cp config/database.sample.yml config/database.yml
+bundle install --without production
+```
 
 Contributing
 -------------
@@ -43,9 +47,11 @@ FAQ
 __Q: Where i can get more information?__  
 A: See test specs for more details.  
 __How?__  
-Install project (see Installation chapter) and then run rake  
+Install project (see Installation chapter) and then run rake test  
 
-    rake
+``` sh
+rake test
+```
 
 docs will be printed to your console :)  
 
