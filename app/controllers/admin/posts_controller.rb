@@ -9,33 +9,40 @@ module Admin
 
     def show
       @post = exhibit(feed.post(params[:id]))
+      @post = extentions(@post).build_presenter
     end
 
     def new
-      @post = form_exhibit(feed.new_post)
+      @post = exhibit(feed.new_post)
+      @post = extentions(@post).build_presenter
     end
 
     def edit
-      @post = form_exhibit(feed.post(params[:id]))
+      @post = exhibit(feed.post(params[:id]))
+      @post = extentions(@post).build_presenter
     end
 
     def create
-      @post = form_exhibit(feed.new_post(params[:post]))
+      @post = exhibit(feed.new_post(params[:post]))
 
       # TODO remove if-else, use callbacks
       if @post.publish
         redirect_to admin_posts_path, notice: t("post.message.published")
       else
+        self.action_name = "new"
+        @post = extentions(@post).build_presenter
         render 'new'
       end
     end
 
     def update
-      @post = form_exhibit(feed.post(params[:id]))
+      @post = exhibit(feed.post(params[:id]))
 
       if @post.update_attributes(params[:post])
         redirect_to @post, notice: t('post.message.updated')
       else
+        self.action_name = "edit"
+        @post = extentions(@post).build_presenter
         render action: "edit"
       end
     end
@@ -47,13 +54,10 @@ module Admin
       if @post.destroy
         redirect_to admin_posts_path, notice: t('post.message.deleted')
       else
+        self.action_name = "edit"
+        @post = extentions(@post).build_presenter
         render action: "edit"
       end
-    end
-
-    private
-    def form_exhibit(object)
-      ValidationExhibit.new(exhibit(object), self)
     end
   end
 end

@@ -3,16 +3,13 @@ class PostsController < ApplicationController
 
   def index
     @posts = exhibit(Post.all)
+    @posts = extentions(@posts).build_presenter
     respond_with(@posts)
   end
 
   def show
     @post = exhibit(feed.post(params[:id]))
+    @post = extentions(@post).build_presenter
     respond_with(@post)
-  end
-
-  private
-  def form_exhibit(object)
-    ValidationExhibit.new(exhibit(object), self)
   end
 end

@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/AlexParamonov/display-case.git
-  revision: e0895635819384b79a4c7fd7957cbdf2af4a238b
+  revision: 20e96459f605b3ab5bbdf8ea60c909486b496b3f
   branch: message_delegation
   specs:
     display_case (0.0.5)
 
 GIT
   remote: git://github.com/rspec/rspec-core.git
-  revision: 2901dd0f61d24a45cb96658512c20113d881c1d1
+  revision: a816fe4a336ac0dae5cf1943082ae1bc79faf304
   specs:
     rspec-core (2.11.1)
 
@@ -126,7 +126,7 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    guard (1.5.2)
+    guard (1.5.3)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
@@ -178,7 +178,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
-    multi_json (1.3.6)
+    multi_json (1.3.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -238,12 +238,12 @@ GEM
     rubyzip (0.9.9)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
-    sass (3.2.1)
+    sass (3.2.2)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.25.0)
+    selenium-webdriver (2.26.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
@@ -261,7 +261,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.34)
+    tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)

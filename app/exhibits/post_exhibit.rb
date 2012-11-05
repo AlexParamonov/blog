@@ -8,10 +8,10 @@ class PostExhibit < DisplayCase::Exhibit
   end
 
   def render_preview(template)
-    template.render(partial: 'posts/preview', locals: {post: self})
+    template.render(partial: 'posts/preview', locals: {post: pointer})
   end
 
   def render_details(template)
-    template.render(partial: 'posts/details', locals: {post: self})
+    template.render(partial: 'posts/details', locals: {post: pointer})
   end
 end

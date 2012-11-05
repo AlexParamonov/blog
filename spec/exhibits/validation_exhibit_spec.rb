@@ -1,20 +1,15 @@
-require_relative "../spec_helper_lite"
-require_relative "../../app/exhibits/validation_exhibit"
+require_relative "../../spec_helper_lite"
+require_relative "../../../app/extentions/validation/presenter"
 
-# exhibit or decorator
-describe ValidationExhibit do
+describe Extentions::Validation::Presenter do
   let(:template) { stub(:template) }
-  let(:object) { stub(:object) }
+  let(:object) { stub(:object, errors: errors) }
   let(:errors) { stub(:errors) }
 
-  subject { ValidationExhibit.new(object, stub) }
-
-  before(:each) do
-    subject.stub(:errors) { errors }
-  end
+  subject { Extentions::Validation::Presenter.new(object, template) }
 
   after(:each) do
-    subject.render_errors(template)
+    subject.form
   end
 
   it "should not render any template if object has no errors" do
