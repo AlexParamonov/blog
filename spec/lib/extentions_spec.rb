@@ -2,6 +2,10 @@ require_relative "../spec_helper_lite"
 require_relative "../../lib/extentions"
 
 describe Extentions do
+  before(:each) do
+    Extentions.reset
+  end
+
   after(:each) do
     Extentions.reset
   end

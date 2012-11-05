@@ -26,14 +26,17 @@ describe "Validation extention" do
 
   it "should render errors if save failed" do
       post = OpenStruct.new(
+        title:    '',
         summary:  'Post summary',
         content:  'Post content'
       )
-      fill_in post.title   => '',
+      fill_in post.title   => 'post_title',
               post.summary => 'post_summary',
               post.content => 'post_content'
 
       iclick "post.button.publish"
-      isee   "post.message.published"
+      within '#model-error' do
+        see "error"
+      end
   end
 end

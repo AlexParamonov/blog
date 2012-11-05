@@ -9,17 +9,14 @@ module Admin
 
     def show
       @post = exhibit(feed.post(params[:id]))
-      @post = extentions(@post).build_presenter
     end
 
     def new
       @post = exhibit(feed.new_post)
-      @post = extentions(@post).build_presenter
     end
 
     def edit
       @post = exhibit(feed.post(params[:id]))
-      @post = extentions(@post).build_presenter
     end
 
     def create
@@ -29,8 +26,7 @@ module Admin
       if @post.publish
         redirect_to admin_posts_path, notice: t("post.message.published")
       else
-        self.action_name = "new"
-        @post = extentions(@post).build_presenter
+        self.action_name = 'new'
         render 'new'
       end
     end
@@ -41,8 +37,7 @@ module Admin
       if @post.update_attributes(params[:post])
         redirect_to @post, notice: t('post.message.updated')
       else
-        self.action_name = "edit"
-        @post = extentions(@post).build_presenter
+        self.action_name = 'edit'
         render action: "edit"
       end
     end
@@ -54,8 +49,7 @@ module Admin
       if @post.destroy
         redirect_to admin_posts_path, notice: t('post.message.deleted')
       else
-        self.action_name = "edit"
-        @post = extentions(@post).build_presenter
+        self.action_name = 'edit'
         render action: "edit"
       end
     end

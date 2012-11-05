@@ -1,5 +1,5 @@
-= form_for [:admin, @post] do |f|
-  = @post.validation
+= form_for [:admin, post] do |f|
+  = post.validation
   .field
     = f.label :title
     = f.text_field :title
@@ -9,6 +9,6 @@
   .field
     = f.label :content
     = f.text_area :content
-  = @post.tags
+  = post.tags
   .actions
     = f.submit t 'post.button.publish'
