@@ -27,7 +27,7 @@ describe "Tags extention" do
         @js  = background.publish_post :js_post
       end
 
-      pending "should not see any tags" do
+      it "should not see any tags" do
         bob.visit_listing_page
         not_see '#tags'
       end
@@ -48,7 +48,7 @@ describe "Tags extention" do
         iclick "post.button.publish"
       end
 
-      pending "should see tags under #tags" do
+      it "should see tags under #tags" do
         bob.visit_listing_page
         within '#tags' do
           see 'ruby'

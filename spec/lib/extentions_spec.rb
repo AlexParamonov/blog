@@ -61,8 +61,8 @@ describe Extentions do
         first_extention  = stub(:first_extention)
         second_extention = stub(:second_extention)
 
-        first_extention.should_receive(:process).with(optional_args)
-        second_extention.should_receive(:process).with(optional_args)
+        first_extention.should_receive(:render).with(optional_args)
+        second_extention.should_receive(:render).with(optional_args)
 
         collection = Extentions::Collection.new stub, [first_extention, second_extention]
         collection.process(optional_args)

@@ -10,11 +10,7 @@ module Extentions
       end
 
       def render
-        presenter.send present_as
-      end
-
-      def process
-        extractor.send process_action
+        module_class("Router").new(controller, role, context).process
       end
 
       def to_token
@@ -29,29 +25,23 @@ module Extentions
       private
       attr_reader :model, :context
 
-      def render_action(*)
-        raise NotImplementedError
-      end
-
-      def process_action(*)
-        raise NotImplementedError
-      end
-
       def initialize(model, context)
-        # @model   = params.fetch :model
-        # @context = params.fetch :context, nil
         @model   = model
         @context = context
       end
 
-      def presenter
+      def view
         # TODO require render normal way is increadible hard to test
         require_relative '../renderer'
-        module_class("Presenter").new(module_class("Role").new(model), Extentions::Renderer.new(self))
+        Extentions::Renderer.new(self)
       end
 
-      def extractor
-        module_class("Extractor").new(module_class("Role").new(model), context)
+      def role
+        module_class("Role").new(model)
+      end
+
+      def controller
+        module_class("Controller").new(model, view)
       end
 
       def module_class(name)

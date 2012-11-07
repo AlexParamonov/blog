@@ -22,6 +22,7 @@ module Admin
     def create
       @post = exhibit(feed.new_post(params[:post]))
 
+      Extentions.extentions_for(@post, self).process
       # TODO remove if-else, use callbacks
       if @post.publish
         redirect_to admin_posts_path, notice: t("post.message.published")

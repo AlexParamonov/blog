@@ -25,12 +25,12 @@ describe Extentions::Validation::Role do
       errors.stub(:full_messages).and_return(['first error', 'second error'])
       model.stub_chain(:class, :model_name, :human).and_return('Test Model')
 
-      instance.errors.messages.should eq ['first error', 'second error']
+      instance.messages.should eq ['first error', 'second error']
     end
 
     it "should use the ActiveModelAdapter if object uses ActiveModel::Errors" do
-      instance.should_receive(:active_model).and_return(stub(:errors, errors:[]))
-      instance.errors
+      instance.should_receive(:active_model).and_return(stub(:errors, messages:[]))
+      instance.messages
     end
   end
 end

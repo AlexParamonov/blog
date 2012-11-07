@@ -37,7 +37,7 @@ module Extentions
 
     def process(*params)
       extentions.each do |extention|
-        extention.process(*params)
+        extention.render(*params)
       end
     end
 

@@ -7,8 +7,12 @@ module Extentions
         @model = model
       end
 
-      def errors
-        adapter.errors
+      def messages
+        adapter.messages
+      end
+
+      def model_name
+        adapter.model_name
       end
 
       private

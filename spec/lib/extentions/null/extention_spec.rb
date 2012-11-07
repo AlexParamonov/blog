@@ -10,10 +10,6 @@ describe Extentions::Null::Extention do
     subject.render.should be_nil
   end
 
-  it "#process should be null" do
-    subject.process.should be_nil
-  end
-
   it "#valid? should be true" do
     subject.should be_valid
   end

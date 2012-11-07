@@ -9,24 +9,12 @@ module Extentions
         @object = object
       end
 
-      def errors
-        model.new(
-          model_name: model_name,
-          messages: messages
-        )
-      end
-
-      private
-      def model_name
-        raise NotImplementedError
-      end
-
       def messages
         raise NotImplementedError
       end
 
-      def model
-        ModelErrors
+      def model_name
+        raise NotImplementedError
       end
     end
   end
