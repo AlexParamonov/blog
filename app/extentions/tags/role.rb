@@ -13,7 +13,7 @@ module Extentions
       def find_tags(attributes_set)
         attributes_set.map do |attributes|
           TagsStorageDb.find_or_create attributes
-        end
+        end.uniq
       end
 
       def tags

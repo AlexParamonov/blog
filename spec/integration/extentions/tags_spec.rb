@@ -22,32 +22,55 @@ describe "Tags extention" do
   let(:alex) { user.act_as 'Post::Admin' }
 
   describe "no tags created" do
+    before(:each) do
+      @js  = background.publish_post :js_post
+    end
+
     describe "on post listing page" do
-      before(:each) do
-        @js  = background.publish_post :js_post
-      end
 
       it "should not see any tags" do
         bob.visit_listing_page
         not_see '#tags'
       end
     end
+
+    describe "on post creation page" do
+      before(:each) do
+        alex.visit_new_page
+      end
+
+      it "should skip duplicated tags" do
+        alex.visit_edit_page(@js)
+
+        fill_in 'ruby, ruby, rails' => 'tags'
+
+        iclick "post.button.publish"
+        isee   "post.message.updated"
+
+        see 'ruby'
+        see 'rails'
+        not_see 'ruby, ruby'
+      end
+    end
   end
 
   describe "tags created" do
-    describe "on post listing page" do
-      before(:each) do
-        alex.visit_new_page
-        post = OpenStruct.new FactoryGirl.attributes_for(:js_post)
+    before(:each) do
+      @oor = background.publish_post :oor_post
+      alex.visit_edit_page(@oor)
+      fill_in 'ruby, js' => 'tags'
+      iclick "post.button.publish"
+    end
 
-        fill_in post.title   => 'post_title',
-                post.summary => 'post_summary',
-                post.content => 'post_content',
-                'ruby, js'   => 'tags'
-
-        iclick "post.button.publish"
+    describe "on post edit page" do
+      pending "should fill in tags with currentry assigned tags" do
+        alex.visit_edit_page(@oor)
+        see 'ruby',
+            'js'
       end
+    end
 
+    describe "on post listing page" do
       it "should see tags under #tags" do
         bob.visit_listing_page
         within '#tags' do

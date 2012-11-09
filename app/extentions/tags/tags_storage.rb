@@ -22,6 +22,11 @@ module Extentions
       def to_s
         name
       end
+
+      # Should be in a model
+      def <=>(other)
+        name <=> other.name
+      end
     end
   end
 end
