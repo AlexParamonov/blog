@@ -30,9 +30,6 @@ module Extentions
 
     class TagsRelationDb < ActiveRecord::Base
       self.table_name = :tags_relations
-      # include ::FigLeaf
-      # hide ActiveRecord::Base, ancestors: true, except: [Object, :[]=, :[], :save!, :record_timestamps, :id, :id=, :init_with, :association]
-      # hide_singletons ActiveRecord::Calculations, ActiveRecord::FinderMethods, ActiveRecord::Relation
 
       attr_accessible :model, :tag
       belongs_to :tag, autosave: true, class_name: 'TagsStorageDb'

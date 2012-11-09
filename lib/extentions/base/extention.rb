@@ -1,4 +1,5 @@
 require_relative '../null/extention'
+require_relative '../renderer' if defined? Rails
 require 'naming'
 
 module Extentions
@@ -20,7 +21,7 @@ module Extentions
 
 
       def to_token
-        Naming.new(self).module_name.split('::').last.downcase.to_sym
+        Naming.new(self).tokens.last
       end
 
       def valid?(*)
@@ -37,8 +38,6 @@ module Extentions
       end
 
       def view
-        # TODO require render normal way is increadible hard to test
-        require_relative '../renderer'
         Extentions::Renderer.new(self)
       end
 

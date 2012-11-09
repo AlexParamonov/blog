@@ -20,9 +20,9 @@ module Admin
     def edit; end
 
     def create
-      @extentions = extentions_for @post
+      @extentions = extentions_for post
 
-      @post.publish!
+      post.publish!
       @extentions.process!
 
       redirect_to admin_posts_path, notice: t("post.message.published")
@@ -33,21 +33,21 @@ module Admin
     end
 
     def update
-      @extentions = extentions_for @post
+      @extentions = extentions_for post
 
-      @post.update_attributes!(params[:post])
+      post.update_attributes!(params[:post])
       @extentions.process!
 
-      redirect_to admin_post_path(@post), notice: t("post.message.updated")
+      redirect_to admin_post_path(post), notice: t("post.message.updated")
     rescue => exception
       flash[:alert] = exception.message
       render action: "edit"
     end
 
     def destroy
-      @extentions = extentions_for @post
+      @extentions = extentions_for post
 
-      @post.destroy
+      post.destroy
       @extentions.process!
 
       redirect_to admin_posts_path, notice: t('post.message.deleted')

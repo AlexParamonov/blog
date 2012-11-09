@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   respond_to :html
+
+  attr_reader :post
+  helper_method :post
+
   before_filter :find_post, only: %w(show)
+
 
   def index
     @posts = exhibit(Post.all)
