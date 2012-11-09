@@ -4,8 +4,15 @@ class Naming
   end
 
   def module_name
-    parts = object.class.name.split("::")
-    parts.size > 1 ? parts[0...-1].join('::') : nil
+    namespace.join('::')
+  end
+
+  def namespace
+    object.class.name.split("::")[0...-1]
+  end
+
+  def tokens
+    namespace.map { |part| part.downcase.to_sym }
   end
 
   private
