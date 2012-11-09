@@ -1,6 +1,6 @@
 module Extentions
   module Tags
-    class TagsStorage < ActiveRecord::Base
+    class TagsStorageDb < ActiveRecord::Base
       self.table_name = :tags
 
       # include ::FigLeaf
@@ -8,9 +8,10 @@ module Extentions
       # hide_singletons ActiveRecord::Calculations, ActiveRecord::FinderMethods, ActiveRecord::Relation
 
       attr_accessible :name
-      has_many :tag_relations, dependent: :destroy
+      has_many :tags_relations, dependent: :destroy, class_name: 'TagsRelationDb', foreign_key: 'tag_id'
 
       def self.find_or_create(attributes)
+        # create!(attributes)
         relation = where(attributes)
         if relation.none?
           create!(attributes)

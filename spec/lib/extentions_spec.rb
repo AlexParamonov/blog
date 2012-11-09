@@ -55,17 +55,17 @@ describe Extentions do
       end
     end
 
-    describe "#process" do
+    describe "#process!" do
       it "should process all extentions" do
         optional_args = stub
         first_extention  = stub(:first_extention)
         second_extention = stub(:second_extention)
 
-        first_extention.should_receive(:render).with(optional_args)
-        second_extention.should_receive(:render).with(optional_args)
+        first_extention.should_receive(:process).with(optional_args)
+        second_extention.should_receive(:process).with(optional_args)
 
         collection = Extentions::Collection.new stub, [first_extention, second_extention]
-        collection.process(optional_args)
+        collection.process!(optional_args)
       end
     end
 

@@ -5,16 +5,19 @@ module Extentions
         @model = model
       end
 
-      def find_and_assign_tags(attributes)
-        tags = attributes.map do |attribute_set|
-          TagsStorage.find_or_create(attribute_set)
-        end
+      def find_and_assign_tags(attributes_set)
+        tags = find_tags attributes_set
+        TagsRelation.new(model).tags = tags
+      end
 
-        TagsRelation.assign(model, tags)
+      def find_tags(attributes_set)
+        attributes_set.map do |attributes|
+          TagsStorageDb.find_or_create attributes
+        end
       end
 
       def tags
-        TagsRelation.load_tags_for(model).map do |tag_object|
+        TagsRelation.new(model).tags.map do |tag_object|
           Tag.new tag_object.attributes.symbolize_keys
         end
       end

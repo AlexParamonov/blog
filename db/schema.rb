@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20121102161504) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "tags", ["name"], :name => "index_tags_on_name"
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "tags_relations", :force => true do |t|
     t.integer "model_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20121102161504) do
     t.integer "tag_id"
   end
 
-  add_index "tags_relations", ["model_id", "model_type", "tag_id"], :name => "index_tags_relations_on_model_id_and_model_type_and_tag_id"
+  add_index "tags_relations", ["model_id", "model_type", "tag_id"], :name => "index_tags_relations_on_model_id_and_model_type_and_tag_id", :unique => true
   add_index "tags_relations", ["model_id", "model_type"], :name => "index_tags_relations_on_model_id_and_model_type"
 
 end

@@ -35,9 +35,9 @@ module Extentions
       @model = model
     end
 
-    def process(*params)
+    def process!(*params)
       extentions.each do |extention|
-        extention.render(*params)
+        extention.process(*params)
       end
     end
 

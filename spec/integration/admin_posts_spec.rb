@@ -74,7 +74,7 @@ describe "Admin posts behavior:" do
         alex.visit_edit_page(@oor)
       end
 
-      it "deletes current post" do
+      it "deletes a post" do
         iclick 'post.button.delete'
         isee   "post.message.deleted"
 
@@ -82,6 +82,26 @@ describe "Admin posts behavior:" do
 
         not_see @oor.title
         see @js.title
+      end
+
+      it "updates a post" do
+        updated_post = OpenStruct.new(
+          title:    'Updated title',
+          summary:  'Updated summary',
+          content:  'Updates content'
+        )
+        fill_in updated_post.title   => 'post_title',
+                updated_post.summary => 'post_summary',
+                updated_post.content => 'post_content'
+
+        iclick "post.button.publish"
+        isee   "post.message.updated"
+
+        alex.should_be_at admin_post_path(@oor)
+
+        see updated_post.title
+        see updated_post.summary
+        see updated_post.content
       end
 
     end

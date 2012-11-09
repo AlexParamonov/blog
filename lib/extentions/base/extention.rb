@@ -9,9 +9,15 @@ module Extentions
         extention.valid? ? extention : Null::Extention.new
       end
 
+      # TODO seems like router should not be responcible for rendering
       def render
-        module_class("Router").new(controller, role, context).process
+        router.render
       end
+
+      def process
+        router.process
+      end
+
 
       def to_token
         Naming.new(self).module_name.split('::').last.downcase.to_sym
@@ -43,6 +49,11 @@ module Extentions
       def controller
         module_class("Controller").new(model, view)
       end
+
+      def router
+        module_class("Router").new(controller, role, context)
+      end
+
 
       def module_class(name)
         "#{Naming.new(self).module_name}::#{name}".constantize

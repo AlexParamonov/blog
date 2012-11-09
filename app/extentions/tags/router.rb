@@ -6,54 +6,57 @@ module Extentions
       end
 
       def process
-        action = context.action_name.to_sym
-        input_params = context.params
-
-        case action
-        when :create, :update, :delete
-          apply_changes(action, input_params)
-        else
-          render(action)
+        case context_action
+        when :create, :update
+          taggable.find_and_assign_tags input_attributes
         end
+      end
+
+      def render
+        view_action =
+          case context_action
+          when :show, :index then :preview_block
+          when :new, :edit, :create, :update then :input
+          else
+            :nothing
+          end
+
+        tags =
+          case context_action
+          when :edit, :show, :index
+            taggable.tags
+
+          when :new
+            []
+
+          when :create, :update
+            taggable.find_tags input_attributes
+
+          end
+        view_params = { tags: tags }
+
+        controller.send view_action, view_params
       end
 
       private
       attr_reader :controller, :taggable, :context
 
-      def apply_changes(action, input_params)
-        attributes =
-          case action
-          when :create, :update
-            input_params.fetch(:tags).split(/\s*,\s*/).map do |tag_name|
-              { name: tag_name }
-            end
-
-          when :delete
-            []
-          end
-
-        taggable.find_and_assign_tags attributes
+      def context_action
+        @context_action ||= context.action_name.to_sym
       end
 
-      def render(action)
-        view_action =
-          case action
-          when :show, :index then :preview_block
-          when :new, :edit then   :input
-          else
-            :nothing
+      def input_attributes
+        params = context.params
+
+        case context_action
+        when :create, :update
+          params.fetch(:tags).split(/\s*,\s*/).map do |tag_name|
+            { name: tag_name }
           end
 
-        view_params =
-          case(action)
-          when :edit, :show, :index
-            { tags: taggable.tags }
-
-          when :new
-            { tags: [] }
-          end
-
-        controller.send view_action, view_params
+        else
+          []
+        end
       end
     end
   end

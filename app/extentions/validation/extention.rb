@@ -10,7 +10,7 @@ module Extentions
 
       private
       def applicable_actions
-        %w(edit update new)
+        %w(edit update new create update)
       end
     end
   end

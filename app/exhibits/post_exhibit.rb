@@ -8,22 +8,14 @@ class PostExhibit < DisplayCase::Exhibit
   end
 
   def render_preview(template)
-    # TODO autoapply
-    load_modules
     template.render(partial: 'posts/preview', locals: {post: pointer})
   end
 
   def render_details(template)
-    load_modules
     template.render(partial: 'posts/details', locals: {post: pointer})
   end
 
   def render_form(template)
-    load_modules
     template.render(partial: 'posts/form', locals: {post: pointer})
-  end
-
-  def load_modules
-    self.pointer = Extentions.extentions_for(pointer, context).build_presenter
   end
 end

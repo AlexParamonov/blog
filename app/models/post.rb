@@ -7,4 +7,8 @@ class Post < ActiveRecord::Base
   def publish
     save
   end
+
+  def publish!
+    save!
+  end
 end
