@@ -1,3 +1,4 @@
+require 'display_case'
 require 'naming'
 
 class PathExhibit < DisplayCase::Exhibit
@@ -6,11 +7,15 @@ class PathExhibit < DisplayCase::Exhibit
   end
 
   def path
-    module_name = Naming.new(context).module_name
-    if module_name
-      context.polymorphic_path([module_name.downcase, __getobj__])
-    else
-      context.polymorphic_path(__getobj__)
-    end
+    context.polymorphic_path namespace_tokens << __getobj__
+  end
+
+  def namespace_path(path)
+    (namespace_tokens << path).join('/')
+  end
+
+  private
+  def namespace_tokens
+    Naming.new(context).tokens
   end
 end
