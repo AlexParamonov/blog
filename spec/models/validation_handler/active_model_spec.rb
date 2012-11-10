@@ -1,5 +1,5 @@
-require 'spec_helper_lite'
 require 'active_model'
+require_relative '../../spec_helper_lite'
 require_relative "../../../app/models/validation_handler/active_model_extractor"
 
 class TestModel
