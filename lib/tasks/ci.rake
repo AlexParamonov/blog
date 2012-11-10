@@ -1,6 +1,10 @@
+require 'rspec/core/rake_task'
+
 namespace :ci do
-  task :tests do
-    Rails.env = 'test'
-    at_exit { exit RSpec::Core::Runner.run(['spec', '-fprogress']).to_i unless $! }
+  desc "Run unit tests"
+  RSpec::Core::RakeTask.new('tests') do |t|
+    t.pattern = 'spec/**/*_spec.rb'
+    t.rspec_opts = '-fprogress'
+    t.verbose = true
   end
 end
