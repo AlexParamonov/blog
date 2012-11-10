@@ -1,3 +1,5 @@
+require 'display_case'
+
 class PostExhibit < DisplayCase::Exhibit
   def self.applicable_to?(object, context)
     object_is_any_of?(object, 'Post')
@@ -8,10 +10,14 @@ class PostExhibit < DisplayCase::Exhibit
   end
 
   def render_preview(template)
-    template.render(partial: 'posts/preview', locals: {post: self})
+    template.render(partial: 'posts/preview', locals: {post: pointer})
   end
 
   def render_details(template)
-    template.render(partial: 'posts/details', locals: {post: self})
+    template.render(partial: 'posts/details', locals: {post: pointer})
+  end
+
+  def render_form(template)
+    template.render(partial: namespace_path('posts/form'), locals: {post: pointer})
   end
 end

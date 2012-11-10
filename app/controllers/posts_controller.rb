@@ -1,18 +1,22 @@
 class PostsController < ApplicationController
   respond_to :html
 
+  attr_reader :post
+  helper_method :post
+
+  before_filter :find_post, only: %w(show)
+
+
   def index
     @posts = exhibit(Post.all)
-    respond_with(@posts)
+    @posts = presenter_for @posts
   end
 
-  def show
-    @post = exhibit(feed.post(params[:id]))
-    respond_with(@post)
-  end
+  def show; end
 
   private
-  def form_exhibit(object)
-    ValidationExhibit.new(exhibit(object), self)
+  def find_post
+    @post = exhibit feed.post(params.fetch :id)
+    @post = presenter_for @post
   end
 end

@@ -3,57 +3,68 @@ module Admin
     http_basic_authenticate_with :name => ::CONFIG.admin.name, :password => ::CONFIG.admin.password if CONFIG.require_auth
     respond_to :html
 
+    attr_reader :post
+    helper_method :post
+
+    before_filter :find_post, only: %w(show edit update destroy)
+    before_filter :build_post, only: %w(new create)
+
+
     def index
       @posts = exhibit(Post.all)
+      @posts = presenter_for @posts
     end
 
-    def show
-      @post = exhibit(feed.post(params[:id]))
-    end
-
-    def new
-      @post = form_exhibit(feed.new_post)
-    end
-
-    def edit
-      @post = form_exhibit(feed.post(params[:id]))
-    end
+    def show; end
+    def new; end
+    def edit; end
 
     def create
-      @post = form_exhibit(feed.new_post(params[:post]))
+      @extentions = extentions_for post
 
-      # TODO remove if-else, use callbacks
-      if @post.publish
-        redirect_to admin_posts_path, notice: t("post.message.published")
-      else
-        render 'new'
-      end
+      post.publish!
+      @extentions.process!
+
+      redirect_to admin_posts_path, notice: t("post.message.published")
+    rescue => exception
+      # TODO handle extention errors in a view? or build them into presenter? raise exception?
+      flash[:alert] = exception.message
+      render 'new'
     end
 
     def update
-      @post = form_exhibit(feed.post(params[:id]))
+      @extentions = extentions_for post
 
-      if @post.update_attributes(params[:post])
-        redirect_to @post, notice: t('post.message.updated')
-      else
-        render action: "edit"
-      end
+      post.update_attributes!(params[:post])
+      @extentions.process!
+
+      redirect_to admin_post_path(post), notice: t("post.message.updated")
+    rescue => exception
+      flash[:alert] = exception.message
+      render action: "edit"
     end
 
     def destroy
-      @post = feed.post(params[:id])
-      @post.destroy
+      @extentions = extentions_for post
 
-      if @post.destroy
-        redirect_to admin_posts_path, notice: t('post.message.deleted')
-      else
-        render action: "edit"
-      end
+      post.destroy
+      @extentions.process!
+
+      redirect_to admin_posts_path, notice: t('post.message.deleted')
+    rescue => exception
+      flash[:alert] = exception.message
+      render action: "edit"
     end
 
     private
-    def form_exhibit(object)
-      ValidationExhibit.new(exhibit(object), self)
+    def build_post
+      @post = exhibit feed.new_post(params.fetch :post, {})
+      @post = presenter_for @post
+    end
+
+    def find_post
+      @post = exhibit feed.post(params.fetch :id)
+      @post = presenter_for @post
     end
   end
 end

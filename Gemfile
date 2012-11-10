@@ -34,7 +34,7 @@ end
 
 group :test do
   gem 'factory_girl', '~>4.1'
-  gem 'kameleon', '~> 0.2'
+  gem 'kameleon', git: 'git://github.com/AlexParamonov/kameleon.git'
 end
 
 group :test, :development do
