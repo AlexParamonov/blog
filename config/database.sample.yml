@@ -10,5 +10,6 @@ test:
   timeout: 500
 
 production:
-  <<: *defaults
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: ap_blog_test
+  username: postgres
