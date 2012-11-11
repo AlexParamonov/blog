@@ -4,7 +4,7 @@ rvm:
   - ruby-head
   - rbx-19mode
 
-bundler_args: "--without assets production development test"
+bundler_args: "--without development production assets"
 
 matrix:
   allow_failures:
@@ -12,7 +12,6 @@ matrix:
     - rvm: rbx-19mode
 before_script:
   - "cp config/database.sample.yml config/database.yml"
-  - "cp config/environments/environment.sample.yml config/environments/production.yml"
-  - psql -c 'create database ap_blog_test;' -U postgres
+  - "cp config/environments/environment.sample.yml config/environments/test.yml"
 script:
-  - "RAILS_ENV=production bundle exec rake ci:tests"
+  - "bundle exec rake ci:tests"
