@@ -7,7 +7,8 @@ GIT
 
 GIT
   remote: git://github.com/AlexParamonov/kameleon.git
-  revision: e9dd5fab6f07df17dd86644b666bfd762f9cc89b
+  revision: 2fa9401b9ba8b13d1d148a11c392707c05889624
+  branch: add_acceptance_directory
   specs:
     kameleon (0.2.0)
       capybara

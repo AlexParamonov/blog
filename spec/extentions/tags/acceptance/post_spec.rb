@@ -5,6 +5,7 @@ require_relative "../../../support/post_background"
 describe "Tags extention" do
   include I18nSupport
   include SpecHelpers
+  include Rails.application.routes.url_helpers
 
   let(:user) do
     TestUser.new.tap do |user|
