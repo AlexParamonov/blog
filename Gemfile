@@ -34,7 +34,7 @@ end
 
 group :test do
   gem 'factory_girl', '~>4.1'
-  gem 'kameleon', git: 'git://github.com/AlexParamonov/kameleon.git', branch: 'add_acceptance_directory'
+  gem 'kameleon', git: 'git://github.com/AlexParamonov/kameleon.git'
 end
 
 group :test, :development do
