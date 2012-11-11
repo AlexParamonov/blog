@@ -38,7 +38,7 @@ group :test do
 end
 
 group :test, :development do
-  gem 'jazz_hands'
+  gem 'jazz_hands' unless defined?(Rubinius)
   gem 'sqlite3'
   gem "pry"
   gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
