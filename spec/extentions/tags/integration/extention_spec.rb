@@ -1,11 +1,11 @@
 require_relative "../../../spec_helper"
 require_relative "../../../support/post_background"
-require_relative "../../../../app/extentions/tags/role"
+require_relative "../../../../app/extentions/tags/taggable_record"
 require_relative "../../../../app/extentions/tags/controller"
 require_relative "../../../../app/extentions/tags/tag"
 
 describe "Tags role and controller" do
-  let(:role) { Extentions::Tags::Role }
+  let(:role) { Extentions::Tags::TaggableRecord }
   let(:controller) { Extentions::Tags::Controller }
   let(:tag) { Extentions::Tags::Tag }
 

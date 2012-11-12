@@ -42,7 +42,7 @@ module Extentions
       end
 
       def role
-        module_class("Role").new(model)
+        module_class("Role").for(model)
       end
 
       def controller
