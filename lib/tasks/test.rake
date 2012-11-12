@@ -26,5 +26,9 @@ if defined?(RSpec)
   end
 
   desc "Run all tests"
-  task 'test' => %w[test:unit test:integration test:acceptance]
+  RSpec::Core::RakeTask.new('test') do |t|
+    t.pattern = FileList['spec/**/*_spec.rb']
+    t.verbose = true
+  end
+
 end
