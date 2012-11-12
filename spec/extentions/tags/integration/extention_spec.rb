@@ -2,10 +2,12 @@ require_relative "../../../spec_helper"
 require_relative "../../../support/post_background"
 require_relative "../../../../app/extentions/tags/role"
 require_relative "../../../../app/extentions/tags/controller"
+require_relative "../../../../app/extentions/tags/tag"
 
 describe "Tags role and controller" do
   let(:role) { Extentions::Tags::Role }
   let(:controller) { Extentions::Tags::Controller }
+  let(:tag) { Extentions::Tags::Tag }
 
   let(:background) do
     PostBackground.new.tap do |post_background|
@@ -19,9 +21,10 @@ describe "Tags role and controller" do
 
   it "should render tags" do
     template = stub
-    tags = [{name: "ruby"}, {name: "rails"}]
-    tag_objects = role.new(@post).find_and_assign_tags tags
-    rendered = controller.new(@post, template).inline({ tags: tag_objects })
+    tags = [tag.new({name: "ruby"}), tag.new({name: "rails"})]
+
+    role.new(@post).tags = tags
+    rendered = controller.new(@post, template).inline({ tags: role.new(@post).tags })
 
     rendered.should match /ruby.*rails/
   end

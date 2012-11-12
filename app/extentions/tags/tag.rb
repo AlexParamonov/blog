@@ -7,6 +7,7 @@ module Extentions
       def_delegators :to_s, :downcase!
 
       def initialize(attrs = {})
+        attrs.symbolize_keys!
         @name = attrs.fetch(:name).to_s
       end
 

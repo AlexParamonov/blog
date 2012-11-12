@@ -8,7 +8,7 @@ module Extentions
       def process
         case context_action
         when :create, :update
-          taggable.find_and_assign_tags input_attributes
+          taggable.tags = input_tags
         end
       end
 
@@ -30,7 +30,7 @@ module Extentions
             []
 
           when :create, :update
-            taggable.find_tags input_attributes
+            taggable.find_or_create input_tags
 
           end
         view_params = { tags: tags }
@@ -45,18 +45,19 @@ module Extentions
         @context_action ||= context.action_name.to_sym
       end
 
-      def input_attributes
+      def input_tags
         params = context.params
 
-        case context_action
-        when :create, :update
-          params.fetch(:tags).split(/\s*,\s*/).map do |tag_name|
-            { name: tag_name }
+        tags =
+          case context_action
+          when :create, :update
+            Extractor.new.from_string(params.fetch(:tags))
+
+          else
+            []
           end
 
-        else
-          []
-        end
+        TagList.new tags
       end
     end
   end

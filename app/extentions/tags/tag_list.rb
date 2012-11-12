@@ -2,8 +2,9 @@ module Extentions
   module Tags
     class TagList
       extend Forwardable
-      attr_reader :tags
+      include Enumerable
 
+      attr_reader :tags
       def_delegators :tags, :empty?, :to_a, :each, :size
 
       def initialize(tags)
@@ -14,6 +15,10 @@ module Extentions
 
       def sort(*args, &block)
         self.class.new tags.sort(*args, &block)
+      end
+
+      def to_ary
+        tags
       end
     end
   end

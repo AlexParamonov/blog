@@ -6,7 +6,7 @@ module Extentions
     class Extractor
       def initialize(params = {})
         @tag_source  = params.fetch(:tag_source,  -> attrs { Tag.new(attrs) })
-        @data_source = params.fetch(:data_source, -> attrs { TagsStorageDb.new(attrs) })
+        @data_source = params.fetch(:data_source, -> attrs { TagsStorageDb.find_or_create(attrs) })
       end
 
       def from_string(string_input)

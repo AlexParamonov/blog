@@ -5,25 +5,24 @@ module Extentions
         @model = model
       end
 
-      def find_and_assign_tags(attributes_set)
-        tags = find_tags attributes_set
-        TagsRelation.new(model).tags = tags
+      def tags=(tag_list)
+        TagsRelation.new(model).tags = converter.to_data_objects(tag_list)
       end
 
-      def find_tags(attributes_set)
-        attributes_set.map do |attributes|
-          TagsStorageDb.find_or_create attributes
-        end.uniq
+      # TODO rename to_data_objects or wrap it. it looks confusing in current context
+      def find_or_create(tag_list)
+        converter.from_data_objects converter.to_data_objects(tag_list)
       end
 
       def tags
-        TagsRelation.new(model).tags.map do |tag_object|
-          Tag.new tag_object.attributes.symbolize_keys
-        end
+        converter.from_data_objects TagsRelation.new(model).tags
       end
 
       private
       attr_reader :model
+      def converter
+        Extractor.new
+      end
     end
   end
 end
