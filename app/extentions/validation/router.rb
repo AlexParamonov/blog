@@ -1,13 +1,14 @@
+require 'extentions/base/router'
+
+# TODO Validatio is more an extention or an exhibit?
 module Extentions
   module Validation
-    # TODO add interface
-    class Router
+    class Router < Base::Router
       def initialize(controller, role, context)
         @controller, @role, @context = controller, role, context
       end
 
-      def process
-      end
+      def process; end
 
       def render
         view_action = :form

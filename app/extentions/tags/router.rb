@@ -1,17 +1,14 @@
+require 'extentions/base/router'
 require_relative 'models/tag'
 require_relative 'models/tag_list'
 
 module Extentions
   module Tags
-    class Router
-      def initialize(controller, taggable_role, context)
-        @controller, @taggable, @context = controller, taggable_role, context
-      end
-
+    class Router < Base::Router
       def process
         case context_action
         when :create, :update
-          taggable.tags = input_tags
+          role.tags = input_tags
         end
       end
 
@@ -27,7 +24,7 @@ module Extentions
         tags =
           case context_action
           when :edit, :show, :index
-            taggable.tags
+            role.tags
 
           when :new
             []
@@ -42,11 +39,7 @@ module Extentions
       end
 
       private
-      attr_reader :controller, :taggable, :context
-
-      def context_action
-        @context_action ||= context.action_name.to_sym
-      end
+      attr_reader :controller, :role, :context
 
       def input_tags
         params = context.params

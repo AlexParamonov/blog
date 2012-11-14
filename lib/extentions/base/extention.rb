@@ -10,7 +10,6 @@ module Extentions
         extention.valid? ? extention : Null::Extention.new
       end
 
-      # TODO seems like router should not be responcible for rendering
       def render
         router.render
       end
@@ -18,7 +17,6 @@ module Extentions
       def process
         router.process
       end
-
 
       def to_token
         Naming.new(self).tokens.last

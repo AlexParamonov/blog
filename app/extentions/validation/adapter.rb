@@ -1,5 +1,3 @@
-require_relative 'model_errors'
-
 module Extentions
   module Validation
     class Adapter
