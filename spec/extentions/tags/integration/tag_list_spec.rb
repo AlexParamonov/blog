@@ -1,10 +1,11 @@
 require_relative "../../../spec_helper_lite"
-require_relative "../../../../app/extentions/tags/tag_list"
-require_relative "../../../../app/extentions/tags/tag"
+require_relative "../../../../app/extentions/tags/models/tag_list"
+require_relative "../../../../app/extentions/tags/models/tag"
 
-describe Extentions::Tags::TagList do
-  let(:list) { Extentions::Tags::TagList }
-  let(:tag) { Extentions::Tags::Tag }
+describe Extentions::Tags::Model::TagList do
+  let(:extention)  { Extentions::Tags }
+  let(:list) { extention::Model::TagList }
+  let(:tag) { extention::Model::Tag }
 
   let(:tag_list) { list.new tags }
   let(:tags) { string_tags.map { |tag_name| tag.new name: tag_name } }
@@ -26,7 +27,5 @@ describe Extentions::Tags::TagList do
         tag_list.sort.each { |tag_object| tag_object.should be_a tag }
       end
     end
-
-
   end
 end

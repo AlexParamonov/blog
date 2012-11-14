@@ -1,13 +1,15 @@
 require_relative "../../../spec_helper"
 require_relative "../../../support/post_background"
-require_relative "../../../../app/extentions/tags/taggable_record"
+require_relative "../../../../app/extentions/tags/roles/record"
 require_relative "../../../../app/extentions/tags/controller"
-require_relative "../../../../app/extentions/tags/tag"
+require_relative "../../../../app/extentions/tags/models/tag"
 
 describe "Tags role and controller" do
-  let(:role) { Extentions::Tags::TaggableRecord }
-  let(:controller) { Extentions::Tags::Controller }
-  let(:tag) { Extentions::Tags::Tag }
+  let(:extention)  { Extentions::Tags }
+  let(:template)   { Extentions::Renderer.new(stub(:extention, to_token: 'tags')) }
+  let(:controller) { extention::Controller }
+  let(:role)       { extention::Role::Record }
+  let(:tag)        { extention::Model::Tag }
 
   let(:background) do
     PostBackground.new.tap do |post_background|
@@ -20,11 +22,10 @@ describe "Tags role and controller" do
   end
 
   it "should render tags" do
-    template = stub
     tags = [tag.new({name: "ruby"}), tag.new({name: "rails"})]
 
     role.new(@post).tags = tags
-    rendered = controller.new(@post, template).inline({ tags: role.new(@post).tags })
+    rendered = controller.new(@post, template).preview_block({ tags: role.new(@post).tags })
 
     rendered.should match /ruby.*rails/
   end

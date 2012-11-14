@@ -1,15 +1,15 @@
-require_relative 'taggable_record'
-require_relative 'taggable_relation'
+require_relative 'roles/record'
+require_relative 'roles/relation'
 
 module Extentions
   module Tags
-    class Role
+    module Role
       def self.for(model)
         case model
         when ::Class, ::ActiveRecord::Relation
-          TaggableRelation.new(model)
+          Relation.new(model)
         else
-          TaggableRecord.new(model)
+          Record.new(model)
         end
       end
     end

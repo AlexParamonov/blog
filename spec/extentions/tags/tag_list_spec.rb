@@ -1,8 +1,8 @@
 require_relative "../../spec_helper_lite"
-require_relative "../../../app/extentions/tags/tag_list"
+require_relative "../../../app/extentions/tags/models/tag_list"
 
-describe Extentions::Tags::TagList do
-  subject { Extentions::Tags::TagList }
+describe Extentions::Tags::Model::TagList do
+  subject { Extentions::Tags::Model::TagList }
 
   describe "given empty array" do
     let(:tag_list) { subject.new([]) }
@@ -31,6 +31,12 @@ describe Extentions::Tags::TagList do
       result = tag_list.sort
       result.should be_a subject
     end
+  end
 
+  describe "#join" do
+    let(:tag_list) { subject.new(%w(foo bar)) }
+    it "should join tags by separator" do
+      tag_list.join(', ').should eq 'foo, bar'
+    end
   end
 end

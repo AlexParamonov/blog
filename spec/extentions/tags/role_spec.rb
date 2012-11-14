@@ -7,14 +7,14 @@ stub_class('ActiveRecord::Relation')
 describe Extentions::Tags::Role do
   subject { Extentions::Tags::Role }
 
-  it "should use the TaggableRecord if got an object" do
+  it "should use the Record if got an object" do
     model = Object.new
-    subject.for(model).should be_a Extentions::Tags::TaggableRecord
+    subject.for(model).should be_a Extentions::Tags::Role::Record
   end
 
-  it "should use the TaggableRelation if got a class" do
+  it "should use the Relation if got a class" do
     model = Class.new
-    subject.for(model).should be_a Extentions::Tags::TaggableRelation
+    subject.for(model).should be_a Extentions::Tags::Role::Relation
   end
 end
 

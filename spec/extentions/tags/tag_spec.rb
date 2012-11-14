@@ -1,8 +1,8 @@
 require_relative "../../spec_helper_lite"
-require_relative "../../../app/extentions/tags/tag"
+require_relative "../../../app/extentions/tags/models/tag"
 
-describe Extentions::Tags::Tag do
-  subject { Extentions::Tags::Tag }
+describe Extentions::Tags::Model::Tag do
+  subject { Extentions::Tags::Model::Tag }
 
   it "accept name argument" do
     name = 'ruby'

@@ -1,3 +1,6 @@
+require_relative 'models/tag'
+require_relative 'models/tag_list'
+
 module Extentions
   module Tags
     class Router
@@ -30,7 +33,7 @@ module Extentions
             []
 
           when :create, :update
-            taggable.find_or_create input_tags
+            input_tags
 
           end
         view_params = { tags: tags }
@@ -47,17 +50,13 @@ module Extentions
 
       def input_tags
         params = context.params
+        # TODO extract to a class or make this responsibility of TagList(tags_data)
+        tags_data = controller.from_input(params)
+        tags = tags_data.map do |tag_data|
+          Model::Tag.new name: tag_data
+        end
 
-        tags =
-          case context_action
-          when :create, :update
-            Extractor.new.from_string(params.fetch(:tags))
-
-          else
-            []
-          end
-
-        TagList.new tags
+        Model::TagList.new tags
       end
     end
   end

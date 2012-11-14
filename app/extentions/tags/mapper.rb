@@ -1,18 +1,9 @@
-require_relative "tag"
-require_relative 'tags_storage' if defined? Rails
-
 module Extentions
   module Tags
-    class Extractor
+    class Mapper
       def initialize(params = {})
-        @tag_source  = params.fetch(:tag_source,  -> attrs { Tag.new(attrs) })
-        @data_source = params.fetch(:data_source, -> attrs { TagsStorageDb.find_or_create(attrs) })
-      end
-
-      def from_string(string_input)
-        string_input.split(/\s*,\s*/).map do |tag_name|
-          new_tag name: tag_name
-        end
+        @tag_source  = params.fetch(:tag_source)
+        @data_source = params.fetch(:data_source)
       end
 
       def from_data_objects(data_objects)
