@@ -30,7 +30,9 @@ end
 
 group :test do
   gem 'factory_girl', '~>4.1'
-  gem 'kameleon', git: 'git://github.com/AlexParamonov/kameleon.git'
+  gem 'kameleon', '~> 0.2.1'
+  # Remove when will be fixed (undefined `is` method)
+  gem 'capybara', '< 2.0.0'
 end
 
 group :test, :development do
