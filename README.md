@@ -9,7 +9,7 @@ I am using it to try new things.
 The goal is to get working application ASAP and try ideas, refactoring in branch and if they succeed, merge them into master.  
 First deploys are going to be ugly :)
 
-Please [let me know](https://github.com/inbox/new/AlexParamonov) if you plan to use this app for your site.  
+Please [let me know](mailto:alexander.n.paramonov@gmail.com) if you plan to use this app for your site.  
 
 Contents
 ---------
@@ -73,4 +73,4 @@ see [build history](http://travis-ci.org/#!/AlexParamonov/blog/builds)
 Copyright
 ---------
 Copyright ©2012 Alexander N Paramonov.
-Released under the MIT License. See the LICENSE file for further details.
+Released under the LGPL v3 License. See the LICENSE file for further details.
