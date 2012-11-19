@@ -64,10 +64,9 @@ describe "Tags extention" do
     end
 
     describe "on post edit page" do
-      pending "should fill in tags with currentry assigned tags" do
+      it "should fill in tags with currentry assigned tags" do
         alex.visit_edit_page(@oor)
-        see 'ruby',
-            'js'
+        see 'ruby, js' => 'tags'
       end
     end
 
