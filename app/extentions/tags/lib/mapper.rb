@@ -8,13 +8,13 @@ module Extentions
 
       def from_data_objects(data_objects)
         data_objects.map do |data_object|
-          new_tag data_object.attributes
+          new_tag data_object
         end
       end
 
       def to_data_objects(tags)
         tags.map do |tag|
-          new_data_object({ name: tag.name })
+          new_data_object tag
         end
       end
 

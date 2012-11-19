@@ -1,11 +1,11 @@
 require_relative "../../spec_helper_lite"
 require_relative "../../support/stub_helper"
-require_relative "../../../app/extentions/validation/role"
+require_relative "../../../app/extentions/validation/factory"
 
 stub_class('ActiveModel::Errors')
 
-describe Extentions::Validation::Role do
-  subject { Extentions::Validation::Role }
+describe Extentions::Validation::Factory do
+  subject { Extentions::Validation::Factory.new }
   let(:model) { stub(:active_record_object, errors: errors) }
   let(:errors) do
     stub(:errors).tap do |error|
@@ -14,7 +14,7 @@ describe Extentions::Validation::Role do
   end
 
   it "should use the ActiveModelAdapter if object uses ActiveModel::Errors" do
-    subject.for(model).should be_a Extentions::Validation::ActiveModelAdapter
+    subject.role_for(model).should be_a Extentions::Validation::ActiveModelAdapter
   end
 end
 

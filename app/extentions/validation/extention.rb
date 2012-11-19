@@ -1,5 +1,4 @@
 require 'extentions/base/extention'
-Dir[File.expand_path(File.dirname(__FILE__)) + "/*.rb"].each {|f| require f}
 
 module Extentions
   module Validation

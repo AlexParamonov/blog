@@ -10,6 +10,14 @@ module Extentions
         extention.valid? ? extention : Null::Extention.new
       end
 
+      def self.configure(&block)
+        block.call(config)
+      end
+
+      def self.config
+        @config ||= OpenStruct.new
+      end
+
       def render
         router.render
       end
@@ -35,12 +43,16 @@ module Extentions
         @context = context
       end
 
+      def config
+        self.class.config
+      end
+
       def view
         Extentions::Renderer.new(self)
       end
 
       def role
-        module_class("Role").for(model)
+        module_class("Factory").new(config.adapter).role_for(model)
       end
 
       def controller

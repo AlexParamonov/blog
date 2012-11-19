@@ -1,4 +1,4 @@
-require_relative 'tags'
+require_relative 'tag'
 
 module Extentions
   module Tags
