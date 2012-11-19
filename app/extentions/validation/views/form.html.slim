@@ -1,0 +1,5 @@
+#model-error
+  h2= "#{pluralize(messages.count, "error")} prohibited this #{model_name}  from being saved:"
+  ul
+    - messages.each do |msg|
+      li= msg
