@@ -20,8 +20,7 @@ class TestUser
   module Post
     module Visitor
       def visit_listing_page
-        visit_root
-        click 'posts'
+        visit posts_path
       end
     end
 

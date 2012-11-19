@@ -1,13 +1,6 @@
-p
-  b Title:
-  = post.title
-p
-  b Summary:
-  = post.summary
-p
-  b Content:
-  = post.content
-
-p
-  b Tags
+article
+  h1 = post.title
   = post.tags
+  h5.subheader = post.summary
+  .content = post.content
+

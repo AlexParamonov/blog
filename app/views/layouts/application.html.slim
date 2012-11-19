@@ -7,7 +7,39 @@ html
     = csrf_meta_tags
     meta name="viewport" content="width=device-width, initial-scale=1.0"
   body
-    = link_to 'posts', posts_url
-    .main_content.box
+    .row
+      .eight.columns
+        h1 
+          a href='http://blog.ap-project.org' Blog 
+          small 
+            | at 
+            a href="http://ap-project.org" ap-project
+      .four.columns
+        ul.nav-bar.right
+          li= link_to 'Home', '/'
+          li= link_to 'Posts', posts_url
+      hr
+    .row
       = render 'shared/flash', flash: flash
-      = yield
+
+    .row
+      .nine.columns
+        = yield
+
+      aside.three.columns
+        h5 Categories
+        ul.side-nav
+          li bla
+          li bla
+
+    footer.row
+      .twelve.columns
+        hr
+        .row
+          .six.columns
+            | &copy; Copyright Alexander Paramonov
+
+          .six.columns
+            ul.inline-list.right
+              li= link_to 'Posts', posts_url
+              li= link_to 'Admin posts', admin_posts_url

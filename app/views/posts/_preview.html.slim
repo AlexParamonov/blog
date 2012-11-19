@@ -1,7 +1,5 @@
-h2
-  = link_to post.title, post.path
-p
-  b Summary:
-  = post.summary
-
-= post.tags
+article.panel
+  h3= link_to post.title, post.path
+  p= post.summary
+  == link_to 'Read More &rarr;'.html_safe, post.path
+  = post.tags

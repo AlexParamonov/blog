@@ -10,15 +10,19 @@ module Extentions
         string_input.split(/\s*,\s*/)
       end
 
+      def display_block(params)
+        tags = params.fetch :tags
+        if tags.any? then template.render(partial: '/display_block', locals: { tags: tags }) else nothing end
+      end
       # Render methods
       def preview_block(params)
         tags = params.fetch :tags
-        if tags.any? then template.render('/preview_block', locals: { inline_tags: inline(tags) }) else nothing end
+        if tags.any? then template.render(partial: '/preview_block', locals: { tags: tags }) else nothing end
       end
 
       def input(params)
         tags = params.fetch :tags
-        template.render('/input', locals: { input_value: to_input(tags) })
+        template.render(partial: '/input', locals: { input_value: to_input(tags) })
       end
 
       def nothing(*)
