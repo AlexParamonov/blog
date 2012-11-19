@@ -39,7 +39,6 @@ group :test, :development do
   gem 'jazz_hands' unless defined?(Rubinius)
   gem 'sqlite3'
   gem 'pry'
-  gem 'rspec-rails'
-  gem 'rspec-core',         git: 'git://github.com/rspec/rspec-core.git'
-  gem 'database_cleaner', '~>0.8'
+  gem 'rspec-rails', '~> 2.12.0'
+  gem 'database_cleaner', '~> 0.8'
 end
