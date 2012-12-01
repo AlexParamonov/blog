@@ -15,7 +15,7 @@ html
             | at 
             a href="http://ap-project.org" ap-project
       .four.columns
-        ul.nav-bar.right
+        ul.navigation-top
           li= link_to 'Home', '/'
           li= link_to 'Posts', posts_url
       hr
@@ -25,7 +25,7 @@ html
         = render 'shared/flash', flash: flash
         = yield
 
-      aside.three.columns
+      aside.three.columns.panel
         h5 Categories
         ul.side-nav
           li bla
