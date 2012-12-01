@@ -21,7 +21,7 @@ class Feed
   end
 
   def post(id)
-    entries.find_by_id(id)
+    entries.find(id)
   end
 
   def entries

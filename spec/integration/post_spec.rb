@@ -1,39 +1,32 @@
-require_relative "../spec_helper"
+require_relative '../spec_helper_nulldb'
+require_relative "../../app/models/post"
 
 describe Post do
-  include SpecHelpers
-  let(:feed) { THE_FEED }
+  include NullDB::RSpec::NullifiedDatabase
+  subject { Post.new(title: "new post") }
 
-  it "supports navigation methods" do
-    p2 = make_post_with_date("2011-11-11")
-    p1 = make_post_with_date("2011-11-10")
-    p3 = make_post_with_date("2011-11-12")
+  describe "#pubdate" do
+    describe "before publishing" do
+      it "is blank" do
+        subject.pubdate.should be_nil
+      end
+    end
 
-    p1.prev.should be_nil
-    p2.prev.should eq p1
-    p3.prev.should eq p2
+    describe "after publishing" do
+      before(:each) do
+        @now = DateTime.parse("2011-09-11T02:56")
+        @clock = stub(:clock, now: @now)
+        subject.feed = stub.as_null_object
+        subject.publish(@clock)
+      end
 
-    p1.next.should eq p2
-    p2.next.should eq p3
-    p3.next.should be_nil
+      it "is a datetime" do
+        %w(DateTime ActiveSupport::TimeWithZone).should include subject.pubdate.class.to_s
+      end
 
-    p1.up.should eq feed
-    p2.up.should eq feed
-    p3.up.should eq feed
+      it "is the current time" do
+        subject.pubdate.should eq @now
+      end
+    end
   end
-
-  private
-  def make_post(attrs)
-    attrs[:title] ||= "Post #{attrs.hash}"
-    post = feed.new_post(attrs)
-    post.publish.should eq true
-    post
-  end
-
-  def make_post_with_date(date)
-    make_post(:pubdate => DateTime.parse(date),
-              :title => date)
-  end
-
 end
-

@@ -41,4 +41,5 @@ group :test, :development do
   gem 'pry'
   gem 'rspec-rails', '~> 2.12.0'
   gem 'database_cleaner', '~> 0.8'
+  gem 'activerecord-nulldb-adapter'
 end

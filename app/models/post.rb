@@ -1,7 +1,21 @@
 class Post < ActiveRecord::Base
+  LIMIT_DEFAULT = 10
 
   attr_accessible :content, :summary, :title, :pubdate
-  validates_presence_of :title
+  validates_presence_of :title, :pubdate
+
+  def self.ordered(limit = LIMIT_DEFAULT, clock = DateTime)
+    before(clock.now).limit(limit)
+  end
+
+  def self.before(date)
+    where("pubdate < ?", date).order("pubdate DESC")
+  end
+
+  def self.after(date)
+    where("pubdate > ?", date).order("pubdate ASC")
+  end
+
 
   attr_writer :feed
   def feed
@@ -19,20 +33,12 @@ class Post < ActiveRecord::Base
     feed.add_entry(self)
   end
 
-  def self.first_before(date)
-    where("pubdate < ?", date).order("pubdate DESC").first
-  end
-
-  def self.first_after(date)
-    where("pubdate > ?", date).order("pubdate ASC").first
-  end
-
   def prev
-    self.class.first_before(pubdate)
+    self.class.before(pubdate).first
   end
 
   def next
-    self.class.first_after(pubdate)
+    self.class.after(pubdate).first
   end
 
   def up
