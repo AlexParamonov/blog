@@ -19,11 +19,10 @@ html
           li= link_to 'Home', '/'
           li= link_to 'Posts', posts_url
       hr
-    .row
-      = render 'shared/flash', flash: flash
 
     .row
       .nine.columns
+        = render 'shared/flash', flash: flash
         = yield
 
       aside.three.columns

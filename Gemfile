@@ -8,6 +8,7 @@ gem 'slim-rails', '~> 1.0.3'
 gem 'display_case', git: 'git://github.com/AlexParamonov/display-case.git', branch: 'message_delegation'
 gem 'fig_leaf'
 gem 'hashugar', '~>0.0.6'
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 
 group :production do
   gem 'pg'

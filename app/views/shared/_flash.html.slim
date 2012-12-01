@@ -1,3 +1,5 @@
 .flash-messages
   - flash.each do |name, msg|
-    div id="flash_#{name}" = msg
+    div class="alert-box flash-#{name}" 
+      = msg
+      a.close href="" &times;
