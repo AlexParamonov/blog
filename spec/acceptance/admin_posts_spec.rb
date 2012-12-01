@@ -7,16 +7,12 @@ describe "Admin posts" do
   include SpecHelpers
   include Rails.application.routes.url_helpers
 
-  let(:user) do
-    TestUser.new.tap do |user|
-      user.action_framework = self
-    end
-  end
+  let(:user) { TestUser.new self }
+  let(:background) { PostBackground.new self}
 
-  let(:background) do
-    PostBackground.new.tap do |post_background|
-      post_background.action_framework = self
-    end
+  before(:each) do
+    clock = OpenStruct.new(now: 1.minute.from_now)
+    THE_FEED.entry_fetcher = ->{ Post.ordered(10, clock) }
   end
 
   describe "admin on" do

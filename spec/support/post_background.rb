@@ -7,6 +7,10 @@ class PostBackground
   include Rails.application.routes.url_helpers
   include ActionFramework
 
+  def initialize(action_framework)
+    self.action_framework = action_framework
+  end
+
   def publish_post(factory, *options)
     FactoryGirl.build(factory).tap {|post| post.publish!(*options)}
 

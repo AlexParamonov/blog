@@ -9,11 +9,7 @@ describe "controller" do
   let(:controller) { extention::Controller }
   let(:tag)        { extention::Model::Tag }
 
-  let(:background) do
-    PostBackground.new.tap do |post_background|
-      post_background.action_framework = self
-    end
-  end
+  let(:background) { PostBackground.new self}
 
   before(:each) do
     @post = background.publish_post :js_post

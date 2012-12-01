@@ -5,6 +5,10 @@ class TestUser
   include Rails.application.routes.url_helpers
   include ActionFramework
 
+  def initialize(action_framework)
+    self.action_framework = action_framework
+  end
+
   def act_as(role)
     self.extend class_eval(role.to_s)
   end

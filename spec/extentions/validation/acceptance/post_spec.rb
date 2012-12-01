@@ -7,17 +7,8 @@ describe "Validation extention" do
   include SpecHelpers
   include Rails.application.routes.url_helpers
 
-  let(:user) do
-    TestUser.new.tap do |user|
-      user.action_framework = self
-    end
-  end
-
-  let(:background) do
-    PostBackground.new.tap do |post_background|
-      post_background.action_framework = self
-    end
-  end
+  let(:user) { TestUser.new self }
+  let(:background) { PostBackground.new self}
 
   let(:alex) { user.act_as 'Post::Admin' }
 
