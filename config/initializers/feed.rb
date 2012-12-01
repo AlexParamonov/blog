@@ -1,1 +1,1 @@
-THE_FEED = Feed.new(entry_fetcher: ->{ Post.all })
+THE_FEED = Feed.new(entry_fetcher: ->{ Post.scoped })

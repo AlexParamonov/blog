@@ -2,7 +2,7 @@ class Feed
   attr_writer :post_source, :entry_fetcher
 
   def initialize(options = {})
-    self.entry_fetcher = options.fetch(:entry_fetcher, ->{ @entries })
+    self.entry_fetcher = options.fetch(:entry_fetcher, ->{ Post.scoped })
     self.post_source   = options.fetch(:post_source, ->(*args){ Post.new(*args) })
   end
 
@@ -20,30 +20,22 @@ class Feed
     end
   end
 
-  # Fetch a post by ID
   def post(id)
-    Post.find_by_id(id)
+    entries.find_by_id(id)
   end
 
   def entries
-    fetch_entries || []
+    fetch_entries
   end
 
   def add_entry(entry)
-    @entries ||= []
-    @entries << entry
+    entry.save!
   end
 
   private
+  attr_reader :post_source, :entry_fetcher
+
   def fetch_entries
     entry_fetcher.call()
-  end
-
-  def post_source
-    @post_source
-  end
-
-  def entry_fetcher
-    @entry_fetcher
   end
 end

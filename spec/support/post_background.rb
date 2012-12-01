@@ -7,8 +7,8 @@ class PostBackground
   include Rails.application.routes.url_helpers
   include ActionFramework
 
-  def publish_post(factory)
-    FactoryGirl.create(factory)
+  def publish_post(factory, *options)
+    FactoryGirl.build(factory).tap {|post| post.publish!(*options)}
 
     # admin.visit_new_post_page
 

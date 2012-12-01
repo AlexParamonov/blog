@@ -5,7 +5,7 @@ gem 'rails', '~>3.2.8'
 
 gem 'jquery-rails', '~>2.0'
 gem 'haml-rails', '~>0.3'
-gem 'display_case', git: 'git://github.com/AlexParamonov/display-case.git', branch: 'message_delegation'
+gem 'display_case', git: 'git://github.com/AlexParamonov/display-case.git'
 gem 'fig_leaf'
 gem 'hashugar', '~>0.0.6'
 
