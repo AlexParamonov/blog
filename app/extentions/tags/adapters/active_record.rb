@@ -2,6 +2,8 @@ require_relative '../lib/mapper'
 require_relative '../models/tag'
 require_relative 'active_record/data/tag'
 require_relative 'active_record/storage'
+require_relative '../roles/record'
+require_relative '../roles/relation'
 
 module Extentions
   module Tags

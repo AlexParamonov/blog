@@ -15,7 +15,8 @@ module Extentions
       def render
         view_action =
           case context_action
-          when :show, :index then :preview_block
+          when :index then :preview_block
+          when :show then :display_block
           when :new, :edit, :create, :update then :input
           else
             :nothing
