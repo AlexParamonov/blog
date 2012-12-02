@@ -16,3 +16,6 @@ en:
       deleted: "Post deleted"
       updated: "Post updated"
       
+
+  validation:
+    failed: "Validation failed"

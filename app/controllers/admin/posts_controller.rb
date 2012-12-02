@@ -11,8 +11,7 @@ module Admin
 
 
     def index
-      @posts = exhibit(Post.all)
-      @posts = presenter_for @posts
+      @posts = feed.entries
     end
 
     def show; end
@@ -26,8 +25,10 @@ module Admin
       @extentions.process!
 
       redirect_to admin_posts_path, notice: t("post.message.published")
-    rescue => exception
-      # TODO handle extention errors in a view? or build them into presenter? raise exception?
+    rescue ActiveRecord::RecordInvalid => exception
+      flash[:alert] = t 'validation.failed'
+      render 'new'
+    rescue Exception => exception
       flash[:alert] = exception.message
       render 'new'
     end
