@@ -8,8 +8,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = exhibit(Post.all)
-    @posts = presenter_for @posts
+    @posts = feed.entries
   end
 
   def show; end

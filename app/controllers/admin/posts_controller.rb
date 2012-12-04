@@ -29,7 +29,6 @@ module Admin
       flash[:alert] = t 'validation.failed'
       render 'new'
     rescue Exception => exception
-      binding.pry
       flash[:alert] = exception.message
       render 'new'
     end
