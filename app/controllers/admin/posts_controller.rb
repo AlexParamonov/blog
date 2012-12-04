@@ -29,6 +29,7 @@ module Admin
       flash[:alert] = t 'validation.failed'
       render 'new'
     rescue Exception => exception
+      binding.pry
       flash[:alert] = exception.message
       render 'new'
     end
@@ -40,9 +41,12 @@ module Admin
       @extentions.process!
 
       redirect_to admin_post_path(post), notice: t("post.message.updated")
-    rescue => exception
+    rescue ActiveRecord::RecordInvalid => exception
+      flash[:alert] = t 'validation.failed'
+      render 'edit'
+    rescue Exception => exception
       flash[:alert] = exception.message
-      render action: "edit"
+      render 'edit'
     end
 
     def destroy
