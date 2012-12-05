@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Blog by AlexParamonov</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/AlexParamonov/blog">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/AlexParamonov/blog/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/AlexParamonov/blog/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Blog</h1>
+          <p>most unexpected approach to build a blog</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/AlexParamonov">AlexParamonov</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>Blog</h1>
+
+<p>This is snowball application.
+I am using it to try new things.</p>
+
+<p>Please <a href="mailto:alexander.n.paramonov@gmail.com">let me know</a> if you plan to use this app for your site.  </p>
+
+<h2>Contents</h2>
+
+<ol>
+<li>Installation</li>
+<li>Contributing</li>
+<li>FAQ</li>
+<li>Requirements</li>
+<li>Compatibility</li>
+<li>Copyright</li>
+</ol><h2>Installation</h2>
+
+<p>Сlone a project:</p>
+
+<div class="highlight"><pre>git clone git://github.com/AlexParamonov/blog.git
+</pre></div>
+
+<p>Cd into it and run:</p>
+
+<div class="highlight"><pre><span class="nb">cd </span>blog
+tee config/environments/test.yml config/environments/development.yml &lt; config/environments/environment.sample.yml &gt; /dev/null
+cp config/database.sample.yml config/database.yml
+bundle install --without production
+</pre></div>
+
+<h2>Contributing</h2>
+
+<p>It is a test project, so feel free to contribute.  </p>
+
+<h2>FAQ</h2>
+
+<p><strong>Q: Where i can get more information?</strong><br>
+A: See test specs for more details.<br><strong>How?</strong><br>
+Install project (see Installation chapter) and then run rake test  </p>
+
+<div class="highlight"><pre>rake <span class="nb">test</span>
+</pre></div>
+
+<p>docs will be printed to your console :)  </p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Ruby 1.9.3</li>
+<li>Rails 3.2</li>
+</ul><h2>Compatibility</h2>
+
+<p>tested with Ruby</p>
+
+<ul>
+<li>1.9.3</li>
+<li>ruby-head</li>
+</ul><p>see <a href="http://travis-ci.org/#!/AlexParamonov/blog/builds">build history</a></p>
+
+<h2>Copyright</h2>
+
+<p>Copyright ©2012 Alexander N Paramonov.
+Released under the LGPL v3 License. See the LICENSE file for further details.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
